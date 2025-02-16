@@ -109,6 +109,12 @@ sns.scatterplot(x=housing_data['stories'],y=housing_data['price'])
 #line plot to visualize relation between housing price and stories within house
 sns.barplot(x=housing_data['bedrooms'],y=housing_data['price'])
 
+# In[226]:
+
+
+sns.set(color_codes=True)
+housing_data.corrwith(housing_data.price).plot.bar( figsize = (12, 5), title = "Correlation with respect to Prices", fontsize = 15, rot = 90, grid = True)
+
 
 # In[180]:
 
