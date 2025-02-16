@@ -19,4 +19,4 @@
     ```
      features=["area","bedrooms","bathrooms","stories","mainroad","guestroom","airconditioning","parking","prefarea","furnishingstatus"]
     ```
-  *  Fit the model using Random Forests with an accuracy score of 0.61 and R^2 value of 0.30
+  *  Fitted the model using Random Forests with an OOB score of 0.61 and R^2 value of 0.30
