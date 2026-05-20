@@ -90,7 +90,6 @@ ai-name-matching-engine/
 ├── surveyor_name_standardization.py
 ├── master_names.csv
 ├── input_names.csv
-├── standardized_output.csv
 ├── requirements.txt
 ├── README.md
 ├── LICENSE
