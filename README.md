@@ -4,7 +4,7 @@ A collection of my data science projects
 
 
 
-\## Projects
+\## **Projects**
 
 
 
@@ -14,7 +14,7 @@ Python-based entity resolution engine that standardizes nicknames and abbreviati
 
 
 
-\*\*Technologies:\*\* Python, RapidFuzz, CSV
+**Technologies:** Python, RapidFuzz, CSV
 
 
 
