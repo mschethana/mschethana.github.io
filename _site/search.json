@@ -1,0 +1,79 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Where Statistical Rigor Meets Intelligent Systems",
+    "section": "",
+    "text": "Post With Code\n\n\n\nnews\n\ncode\n\nanalysis\n\n\n\n\n\n\n\n\n\nMay 21, 2026\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nMay 18, 2026\n\n\nTristan O’Malley\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html",
+    "href": "posts/post-with-code/index.html",
+    "title": "Post With Code",
+    "section": "",
+    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+  },
+  {
+    "objectID": "index.html#current-focus",
+    "href": "index.html#current-focus",
+    "title": "Where Statistical Rigor Meets Intelligent Systems",
+    "section": "Current Focus",
+    "text": "Current Focus\n\n\nStatistical Thinking\nExploring how classical statistical principles continue to shape modern machine learning and AI systems.\n\n\nIntelligent Systems\nBuilding practical solutions that combine analytical reasoning with automation and scalable workflows.\n\n\nApplied Problem Solving\nUsing Python, data analysis, and structured experimentation to solve real-world data challenges."
+  },
+  {
+    "objectID": "index.html#featured-work",
+    "href": "index.html#featured-work",
+    "title": "Where Statistical Rigor Meets Intelligent Systems",
+    "section": "Featured Work",
+    "text": "Featured Work\n\nAI-Assisted Name Matching Engine\nA Python-based intelligent matching system designed to standardize and reconcile inconsistent entity names across datasets using analytical preprocessing and similarity-based logic.\n\n\nAnomaly Detection & Analytics\nExploring statistical and machine learning approaches for identifying irregular patterns in business and operational datasets."
+  },
+  {
+    "objectID": "index.html#areas-of-interest",
+    "href": "index.html#areas-of-interest",
+    "title": "Where Statistical Rigor Meets Intelligent Systems",
+    "section": "Areas of Interest",
+    "text": "Areas of Interest\n\nStatistics\nMachine Learning\nArtificial Intelligence\nData Analytics\nPredictive Modeling\nNLP & Entity Resolution\nAnalytical Automation\nIntelligent Decision Systems"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Analytical Thinking, Statistical Foundations, and Intelligent Systems",
+    "section": "",
+    "text": "My background is rooted in statistics, analytical reasoning, and structured problem solving — disciplines that continue to shape the way I approach data science and intelligent system design today.\nI hold a Master’s degree in Statistics and have spent close to five years working across analytics, data operations, business intelligence, and statistical problem solving. Over time, I’ve become increasingly interested in how statistical thinking, programming, and machine learning can be combined to build systems that are both practical and intelligent.\nMy professional journey has spanned multiple analytical domains — from working as a Subject Matter Expert in Statistics to handling complex operational workflows as an EDI Specialist, and more recently contributing as a BI Analyst focused on data-driven reporting, visualization, and analytical automation.\nI have always been fascinated by the ability of data to reveal patterns, insights, and predictive signals hidden beneath complexity. Across each of these roles, a recurring theme has remained constant: understanding patterns, simplifying complexity, and building scalable analytical solutions.\n\n\n\nMy current interests lie at the intersection of:\n\nStatistical Modeling\nMachine Learning\nAI-Assisted Systems\nData Analytics & Visualization\nIntelligent Automation\nPredictive Analytics\nEntity Resolution & NLP\nAnalytical Process Optimization\n\n\n\n\n\n\n\n\nPython\nR\nSQL\n\n\n\n\n\nPower BI\nStrategy (MSTR)\n\n\n\n\n\nExcel\nPower Automate\nData Cleaning & Transformation\nWorkflow Automation\n\n\n\n\n\n\nI’m particularly interested in approaches that combine statistical rigor with practical implementation.\nWhile modern AI systems continue to evolve rapidly, I believe strong analytical foundations remain essential for building reliable, interpretable, and meaningful solutions. Much of my current work and learning focuses on bridging this space between classical statistical reasoning and modern data science applications.\nThis portfolio documents that ongoing journey through projects, technical explorations, and applied problem solving."
+  },
+  {
+    "objectID": "about.html#analytical-thinking-statistical-foundations-and-intelligent-systems",
+    "href": "about.html#analytical-thinking-statistical-foundations-and-intelligent-systems",
+    "title": "About",
+    "section": "",
+    "text": "My background is rooted in statistics, analytical reasoning, and structured problem solving — disciplines that continue to shape the way I approach data science and intelligent system design today.\nI hold a Master’s degree in Statistics and have spent close to five years working across analytics, data operations, business intelligence, and statistical problem solving. Over time, I’ve become increasingly interested in how statistical thinking, programming, and machine learning can be combined to build systems that are both practical and intelligent.\nMy professional journey has spanned multiple analytical domains — from working as a Subject Matter Expert in Statistics to handling complex operational workflows as an EDI Specialist, and more recently contributing as a BI Analyst focused on data-driven reporting, visualization, and analytical automation.\nI have always been fascinated by the ability of data to reveal patterns, insights, and predictive signals hidden beneath complexity. Across each of these roles, a recurring theme has remained constant: understanding patterns, simplifying complexity, and building scalable analytical solutions."
+  },
+  {
+    "objectID": "about.html#areas-of-focus",
+    "href": "about.html#areas-of-focus",
+    "title": "Analytical Thinking, Statistical Foundations, and Intelligent Systems",
+    "section": "",
+    "text": "My current interests lie at the intersection of:\n\nStatistical Modeling\nMachine Learning\nAI-Assisted Systems\nData Analytics & Visualization\nIntelligent Automation\nPredictive Analytics\nEntity Resolution & NLP\nAnalytical Process Optimization"
+  },
+  {
+    "objectID": "about.html#technical-toolkit",
+    "href": "about.html#technical-toolkit",
+    "title": "Analytical Thinking, Statistical Foundations, and Intelligent Systems",
+    "section": "",
+    "text": "Python\nR\nSQL\n\n\n\n\n\nPower BI\nStrategy (MSTR)\n\n\n\n\n\nExcel\nPower Automate\nData Cleaning & Transformation\nWorkflow Automation"
+  },
+  {
+    "objectID": "about.html#approach",
+    "href": "about.html#approach",
+    "title": "Analytical Thinking, Statistical Foundations, and Intelligent Systems",
+    "section": "",
+    "text": "I’m particularly interested in approaches that combine statistical rigor with practical implementation.\nWhile modern AI systems continue to evolve rapidly, I believe strong analytical foundations remain essential for building reliable, interpretable, and meaningful solutions. Much of my current work and learning focuses on bridging this space between classical statistical reasoning and modern data science applications.\nThis portfolio documents that ongoing journey through projects, technical explorations, and applied problem solving."
+  }
+]
