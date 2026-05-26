@@ -25,7 +25,7 @@ I have always been fascinated by the ability of data to reveal patterns, insight
 
 ---
 
-## Areas of Focus
+## Areas of Focus {.about-center}
 
 My current interests lie at the intersection of:
 
@@ -40,7 +40,7 @@ My current interests lie at the intersection of:
 
 ---
 
-## Technical Toolkit
+## Technical Toolkit {.about-center}
 
 ### Programming & Analytics
 - Python

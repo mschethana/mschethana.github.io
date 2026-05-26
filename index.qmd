@@ -1,5 +1,5 @@
 ---
-
+title: "Statistically Intelligent"
 ---
 
 ::: {.hero-section}
