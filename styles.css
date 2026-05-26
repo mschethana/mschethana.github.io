@@ -285,3 +285,7 @@ ul li {
     line-height: 1.5;
     color: #aebdcd;
 }
+#title-block-header {
+    margin-top: 0 !important;
+    padding-top: 20px !important;
+}
