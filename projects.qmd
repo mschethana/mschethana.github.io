@@ -2,10 +2,20 @@
 title: "Projects"
 ---
 
-## [AI-Assisted Name Matching Engine](https://github.com/mschethana/ai-name-matching-engine)
+::: {.projects-grid}
 
-A Python-based intelligent matching system to standardize and reconcile 
-inconsistent entity names across datasets using similarity-based logic.
+::: {.project-card}
+### AI-Assisted Name Matching Engine
+A Python-based intelligent matching system to standardize and reconcile inconsistent entity names across datasets using similarity-based logic.
 
-[View on GitHub →](https://github.com/mschethana/ai-name-matching-engine){.custom-button}
+[View on GitHub →](https://github.com/mschethana/ai-name-matching-engine){.project-button}
+:::
 
+::: {.project-card}
+### Anomaly Detection & Analytics
+Currently in progress -- coming soon!
+
+[View on GitHub →](#){.project-button}
+:::
+
+:::
