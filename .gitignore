@@ -1,6 +1,13 @@
+# Quarto
 .quarto/
+/_freeze/
 _site/
+**/*.quarto_ipynb
+
+# R Project
 .Rproj.user/
 *.Rproj
-/.quarto/
-**/*.quarto_ipynb
+
+# OS
+.DS_Store
+Thumbs.db
