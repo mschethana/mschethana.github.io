@@ -2,8 +2,10 @@
 title: "Projects"
 ---
 
-## Projects
+## [AI-Assisted Name Matching Engine](https://github.com/mschethana/ai-name-matching-engine)
 
-A collection of applied analytics, statistical modeling, machine learning, and intelligent systems projects.
+A Python-based intelligent matching system to standardize and reconcile 
+inconsistent entity names across datasets using similarity-based logic.
 
-Projects and technical case studies will be added here progressively.
+[View on GitHub →](https://github.com/mschethana/ai-name-matching-engine){.custom-button}
+

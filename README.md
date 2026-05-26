@@ -36,16 +36,19 @@ The goal is to combine **statistical rigor with practical implementation** to bu
 
 ---
 
-## 📂 Project Structure
-├── _quarto.yml        # Site configuration
-├── index.qmd          # Home page
-├── about.qmd          # About page
-├── projects.qmd       # Projects page
-├── styles.css         # Custom styling
-├── profile.jpg        # Profile image
+## Project Structure
+
+```
+├── _quarto.yml          # Site configuration
+├── index.qmd            # Home page
+├── about.qmd            # About page
+├── projects.qmd         # Projects page
+├── styles.css           # Custom styling
+├── profile.jpg          # Profile image
 └── .github/
-└── workflows/
-└── publish.yml  # CI/CD deployment workflow
+    └── workflows/
+        └── publish.yml  # CI/CD deployment workflow
+```
 
 ---
 
