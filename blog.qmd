@@ -1,0 +1,7 @@
+---
+title: "Blog"
+---
+
+## Technical Writing & Explorations
+
+This section will document technical explorations, statistical insights, machine learning concepts, and project walkthroughs.

@@ -1,0 +1,9 @@
+---
+title: "Projects"
+---
+
+## Projects
+
+A collection of applied analytics, statistical modeling, machine learning, and intelligent systems projects.
+
+Projects and technical case studies will be added here progressively.
