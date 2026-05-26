@@ -17,7 +17,7 @@ about:
 
 My background is rooted in statistics, analytical reasoning, and structured problem solving — disciplines that continue to shape the way I approach data science and intelligent system design today.
 
-I hold a Master’s degree in Statistics and have spent close to five years working across analytics, data operations, business intelligence, and statistical problem solving. Over time, I’ve become increasingly interested in how statistical thinking, programming, and machine learning can be combined to build systems that are both practical and intelligent.
+I hold a Master's degree in Statistics and have spent close to five years working across analytics, data operations, business intelligence, and statistical problem solving. Over time, I've become increasingly interested in how statistical thinking, programming, and machine learning can be combined to build systems that are both practical and intelligent.
 
 My professional journey has spanned multiple analytical domains — from working as a Subject Matter Expert in Statistics to handling complex operational workflows as an EDI Specialist, and more recently contributing as a BI Analyst focused on data-driven reporting, visualization, and analytical automation.
 
@@ -42,29 +42,39 @@ My current interests lie at the intersection of:
 
 ## Technical Toolkit {.about-center}
 
+::: {.toolkit-grid}
+
+::: {.toolkit-card}
 ### Programming & Analytics
 - Python
 - R
 - SQL
+:::
 
+::: {.toolkit-card}
 ### Visualization & BI
 - Power BI
 - Strategy (MSTR)
+:::
 
+::: {.toolkit-card}
 ### Data & Automation
 - Excel
 - Power Automate
 - Data Cleaning & Transformation
 - Workflow Automation
+:::
+
+:::
 
 ---
 
 ## Approach
 
-I’m particularly interested in approaches that combine statistical rigor with practical implementation.
+I'm particularly interested in approaches that combine statistical rigor with practical implementation.
 
 While modern AI systems continue to evolve rapidly, I believe strong analytical foundations remain essential for building reliable, interpretable, and meaningful solutions. Much of my current work and learning focuses on bridging this space between classical statistical reasoning and modern data science applications.
 
-This portfolio documents that ongoing journey through projects, technical explorations, and applied problem solving.
+This portfolio documents my ongoing journey through projects, technical explorations, and applied problem solving.
 
 ---
