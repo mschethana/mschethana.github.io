@@ -1,9 +1,15 @@
 ---
-title: Blog
+title: ""  # Leave this empty to remove the "Blog" title text completely
 listing:
   contents: posts
+  type: grid          # Switches layout to rectangular compact card boxes
   sort: "date desc"
-  type: default
-  categories: true
-  feed: true
+  categories: true    # Keeps your right-side category filter menu
+  sort-ui: false
+  filter-ui: false
+  # This section explicitly selects ONLY the fields you requested:
+  fields: [image, title, subtitle] 
+format:
+  html:
+    css: styles.css
 ---

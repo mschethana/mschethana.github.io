@@ -1,36 +1,78 @@
 /* Google Fonts import for a highly sophisticated Serif heading font */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
 
-/* Center-align the main header block container */
-.quarto-title {
-  text-align: center;
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 2.8rem;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 0.5rem;
+/* ==========================================================================
+   CUSTOM HEADER BLOCK (FORCE CENTERED)
+   ========================================================================== */
+
+.custom-header-container {
+  text-align: center !important;
+  width: 100% !important;
+  margin-top: 40px !important;
+  margin-bottom: 30px !important;
 }
 
-/* Center-align the category badges layout */
-.quarto-categories {
-  justify-content: center;
+/* Sophisticated Title Font Styles */
+.custom-header-container h1 {
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-size: 2.8rem !important;
+  font-weight: 700 !important;
+  color: #f8fafc !important;
+  margin-bottom: 0.5rem !important;
+  text-align: center !important;
 }
 
-/* Center-align the metadata block (Author, Published Date) */
-.quarto-title-meta {
-  display: flex;
-  justify-content: center;
-  gap: 2rem; /* Creates clean spacing between Date and Author if they sit side-by-side */
-  text-align: center;
+/* Sophisticated Subtitle Font Styles */
+.custom-header-container em {
+  display: block !important;
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-style: italic !important;
+  font-size: 1.5rem !important;
+  font-weight: 400 !important;
+  color: #94a3b8 !important;
+  text-align: center !important;
 }
 
-/* Make metadata text smaller and distinct */
-.quarto-title-meta-heading {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+/* ==========================================================================
+   SPLIT METADATA GRID (DATE LEFT / AUTHOR RIGHT)
+   ========================================================================== */
+
+.custom-metadata-grid {
+  margin-top: 20px !important;
+  margin-bottom: 25px !important;
+  padding-bottom: 15px !important;
+  border-bottom: 1px solid #1e293b !important;
+  font-family: system-ui, -apple-system, sans-serif !important;
+  font-size: 0.85rem !important;
+  color: #94a3b8 !important;
 }
 
-.quarto-title-meta-contents {
-  font-size: 0.9rem;
+/* Format the uppercase field headers (PUBLISHED / BY:) */
+.custom-metadata-grid strong {
+  font-size: 0.75rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  color: #64748b !important;
+  display: block !important;
+  margin-bottom: 4px !important;
+}
+
+/* Clickable author link layout styling */
+.custom-metadata-grid a {
+  color: #f8fafc !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  border-bottom: 1px dotted #64748b !important;
+  transition: color 0.2s ease !important;
+}
+
+.custom-metadata-grid a:hover {
+  color: #3b82f6 !important;
+  border-bottom: 1px solid #3b82f6 !important;
+}
+
+/* Hide any remaining built-in theme title header wrappers */
+header#title-block-header.quarto-title-block.default,
+.quarto-title-block {
+  display: none !important;
 }

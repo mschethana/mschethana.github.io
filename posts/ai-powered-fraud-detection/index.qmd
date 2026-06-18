@@ -1,10 +1,6 @@
 ---
 title: "From Score to Story"
 subtitle: "AI-Powered Fraud Detection in Power BI"
-date: 2026-06-18
-by:
-- name: "Chethana M S"
-  url: https://www.linkedin.com/in/mschethana/
 categories:
   - Power BI
   - Machine Learning
@@ -14,7 +10,25 @@ categories:
   - Portfolio Project
 image: hero.png
 toc: true
+format:
+  html:
+    css: styles.css
 ---
+
+::: {layout-ncol=2 .custom-metadata-grid}
+
+::: {.justify-left}
+**Author:**  
+[Chethana M S](https://www.linkedin.com/in/mschethana/)
+:::
+
+::: {.text-end}
+**PUBLISHED**  
+June 18, 2026
+:::
+
+:::
+
 
 ## Introduction
 
