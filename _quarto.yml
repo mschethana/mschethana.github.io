@@ -3,6 +3,7 @@ project:
 
 website:
   title: "Statistically Intelligent"
+  site-url: "https://mschethana.github.io/"
 
   navbar:
     left:
