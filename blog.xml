@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Statistically Intelligent</title>
+<link>https://mschethana.github.io/blog.html</link>
+<atom:link href="https://mschethana.github.io/blog.xml" rel="self" type="application/rss+xml"/>
+<description></description>
+<generator>quarto-1.9.38</generator>
+<lastBuildDate>Thu, 18 Jun 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>From Score to Story</title>
+  <link>https://mschethana.github.io/posts/ai-powered-fraud-detection/</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Traditional dashboards excel at answering <em>what happened</em>.</p>
+<p>But fraud investigators, the high stakes question is always:</p>
+<blockquote class="blockquote">
+<p>Why did this happen, and where should I look next?</p>
+</blockquote>
+<p>This project bridges that gap. By combining Power BI with an Isolation Forest anomaly detection model, Groq’s Llama API, and native analytics like Key Influencers, this dashboard moves beyond basic reporting into automated, AI-powered explanation.</p>
+</section>
+<section id="solution-architecture" class="level2">
+<h2 class="anchored" data-anchor-id="solution-architecture">Solution Architecture</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://mschethana.github.io/posts/ai-powered-fraud-detection/Architecture.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:40.0%"></p>
+</figure>
+</div>
+<hr>
+</section>
+<section id="fraud-dashboard" class="level2">
+<h2 class="anchored" data-anchor-id="fraud-dashboard">Fraud Dashboard</h2>
+<p><img src="https://mschethana.github.io/posts/ai-powered-fraud-detection/Fraud_Overview.png" class="img-fluid"></p>
+<hr>
+</section>
+<section id="ai-insights" class="level2">
+<h2 class="anchored" data-anchor-id="ai-insights">AI Insights</h2>
+<p><img src="https://mschethana.github.io/posts/ai-powered-fraud-detection/AI_Insights.png" class="img-fluid"></p>
+
+
+</section>
+
+ ]]></description>
+  <category>Power BI</category>
+  <category>Machine Learning</category>
+  <category>Generative AI</category>
+  <category>Fraud Detection</category>
+  <category>MLOps &amp; Integration</category>
+  <category>Portfolio Project</category>
+  <guid>https://mschethana.github.io/posts/ai-powered-fraud-detection/</guid>
+  <pubDate>Thu, 18 Jun 2026 00:00:00 GMT</pubDate>
+  <media:content url="https://mschethana.github.io/posts/ai-powered-fraud-detection/hero.png" medium="image" type="image/png" height="80" width="144"/>
+</item>
+</channel>
+</rss>

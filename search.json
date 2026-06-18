@@ -63,17 +63,45 @@
     "text": "AI-Assisted Name Matching Engine\nA Python-based intelligent matching system to standardize and reconcile inconsistent entity names across datasets using similarity-based logic.\nView on GitHub →\n\n\nAnomaly Detection & Analytics\nCurrently in progress – coming soon!\nView on GitHub →"
   },
   {
+    "objectID": "posts/ai-powered-fraud-detection/index.html",
+    "href": "posts/ai-powered-fraud-detection/index.html",
+    "title": "From Score to Story",
+    "section": "",
+    "text": "Traditional dashboards excel at answering what happened.\nBut fraud investigators, the high stakes question is always:\n\nWhy did this happen, and where should I look next?\n\nThis project bridges that gap. By combining Power BI with an Isolation Forest anomaly detection model, Groq’s Llama API, and native analytics like Key Influencers, this dashboard moves beyond basic reporting into automated, AI-powered explanation."
+  },
+  {
+    "objectID": "posts/ai-powered-fraud-detection/index.html#introduction",
+    "href": "posts/ai-powered-fraud-detection/index.html#introduction",
+    "title": "From Score to Story",
+    "section": "",
+    "text": "Traditional dashboards excel at answering what happened.\nBut fraud investigators, the high stakes question is always:\n\nWhy did this happen, and where should I look next?\n\nThis project bridges that gap. By combining Power BI with an Isolation Forest anomaly detection model, Groq’s Llama API, and native analytics like Key Influencers, this dashboard moves beyond basic reporting into automated, AI-powered explanation."
+  },
+  {
+    "objectID": "posts/ai-powered-fraud-detection/index.html#solution-architecture",
+    "href": "posts/ai-powered-fraud-detection/index.html#solution-architecture",
+    "title": "From Score to Story",
+    "section": "Solution Architecture",
+    "text": "Solution Architecture"
+  },
+  {
+    "objectID": "posts/ai-powered-fraud-detection/index.html#fraud-dashboard",
+    "href": "posts/ai-powered-fraud-detection/index.html#fraud-dashboard",
+    "title": "From Score to Story",
+    "section": "Fraud Dashboard",
+    "text": "Fraud Dashboard"
+  },
+  {
+    "objectID": "posts/ai-powered-fraud-detection/index.html#ai-insights",
+    "href": "posts/ai-powered-fraud-detection/index.html#ai-insights",
+    "title": "From Score to Story",
+    "section": "AI Insights",
+    "text": "AI Insights"
+  },
+  {
     "objectID": "blog.html",
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "This section will document technical explorations, statistical insights, machine learning concepts, and project walkthroughs."
-  },
-  {
-    "objectID": "blog.html#technical-writing-explorations",
-    "href": "blog.html#technical-writing-explorations",
-    "title": "Blog",
-    "section": "",
-    "text": "This section will document technical explorations, statistical insights, machine learning concepts, and project walkthroughs."
+    "text": "From Score to Story\n\n\nAI-Powered Fraud Detection in Power BI\n\n\n\nPower BI\n\nMachine Learning\n\nGenerative AI\n\nFraud Detection\n\nMLOps & Integration\n\nPortfolio Project\n\n\n\n\n\n\n\n\n\nJun 18, 2026\n\n\n\n\n\nNo matching items"
   }
 ]
