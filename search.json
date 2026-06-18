@@ -67,14 +67,14 @@
     "href": "posts/ai-powered-fraud-detection/index.html",
     "title": "From Score to Story",
     "section": "",
-    "text": "Traditional dashboards excel at answering what happened.\nBut fraud investigators, the high stakes question is always:\n\nWhy did this happen, and where should I look next?\n\nThis project bridges that gap. By combining Power BI with an Isolation Forest anomaly detection model, Groq’s Llama API, and native analytics like Key Influencers, this dashboard moves beyond basic reporting into automated, AI-powered explanation."
+    "text": "Author:\nChethana M S\n\n\nPUBLISHED\nJune 18, 2026"
   },
   {
     "objectID": "posts/ai-powered-fraud-detection/index.html#introduction",
     "href": "posts/ai-powered-fraud-detection/index.html#introduction",
     "title": "From Score to Story",
-    "section": "",
-    "text": "Traditional dashboards excel at answering what happened.\nBut fraud investigators, the high stakes question is always:\n\nWhy did this happen, and where should I look next?\n\nThis project bridges that gap. By combining Power BI with an Isolation Forest anomaly detection model, Groq’s Llama API, and native analytics like Key Influencers, this dashboard moves beyond basic reporting into automated, AI-powered explanation."
+    "section": "Introduction",
+    "text": "Introduction\nTraditional dashboards excel at answering what happened.\nBut fraud investigators, the high stakes question is always:\n\nWhy did this happen, and where should I look next?\n\nThis project bridges that gap. By combining Power BI with an Isolation Forest anomaly detection model, Groq’s Llama API, and native analytics like Key Influencers, this dashboard moves beyond basic reporting into automated, AI-powered explanation."
   },
   {
     "objectID": "posts/ai-powered-fraud-detection/index.html#solution-architecture",
@@ -100,8 +100,8 @@
   {
     "objectID": "blog.html",
     "href": "blog.html",
-    "title": "Blog",
+    "title": "Statistically Intelligent",
     "section": "",
-    "text": "From Score to Story\n\n\nAI-Powered Fraud Detection in Power BI\n\n\n\nPower BI\n\nMachine Learning\n\nGenerative AI\n\nFraud Detection\n\nMLOps & Integration\n\nPortfolio Project\n\n\n\n\n\n\n\n\n\nJun 18, 2026\n\n\n\n\n\nNo matching items"
+    "text": "From Score to Story\n\n\nAI-Powered Fraud Detection in Power BI\n\n\n\n\n\nNo matching items"
   }
 ]
