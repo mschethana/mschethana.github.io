@@ -1,0 +1,36 @@
+/* Google Fonts import for a highly sophisticated Serif heading font */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* Center-align the main header block container */
+.quarto-title {
+  text-align: center;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+}
+
+/* Center-align the category badges layout */
+.quarto-categories {
+  justify-content: center;
+}
+
+/* Center-align the metadata block (Author, Published Date) */
+.quarto-title-meta {
+  display: flex;
+  justify-content: center;
+  gap: 2rem; /* Creates clean spacing between Date and Author if they sit side-by-side */
+  text-align: center;
+}
+
+/* Make metadata text smaller and distinct */
+.quarto-title-meta-heading {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.quarto-title-meta-contents {
+  font-size: 0.9rem;
+}

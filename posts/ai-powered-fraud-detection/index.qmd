@@ -1,0 +1,44 @@
+---
+title: "From Score to Story"
+subtitle: "AI-Powered Fraud Detection in Power BI"
+date: 2026-06-18
+by:
+- name: "Chethana M S"
+  url: https://www.linkedin.com/in/mschethana/
+categories:
+  - Power BI
+  - Machine Learning
+  - Generative AI
+  - Fraud Detection
+  - MLOps & Integration
+  - Portfolio Project
+image: hero.png
+toc: true
+---
+
+## Introduction
+
+Traditional dashboards excel at answering *what happened*.
+
+But fraud investigators, the high stakes question is always:
+
+> Why did this happen, and where should I look next?
+
+This project bridges that gap. By combining Power BI with an Isolation Forest anomaly detection model, Groq's Llama API, and native analytics like Key Influencers, this dashboard moves beyond basic reporting into automated, AI-powered explanation.
+
+## Solution Architecture
+
+![](Architecture.png){width=40% fig-align="center"}
+
+---
+
+
+## Fraud Dashboard
+
+![](Fraud_Overview.png)
+
+---
+
+## AI Insights
+
+![](AI_Insights.png)
