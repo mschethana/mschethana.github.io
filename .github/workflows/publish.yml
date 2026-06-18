@@ -22,7 +22,7 @@ jobs:
       - name: Render site
         run: quarto render
 
-      - name: Publish to GitHub Pages
+      - name: Publish site
         uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: gh-pages

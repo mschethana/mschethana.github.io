@@ -32,6 +32,7 @@ website:
 format:
   html:
     theme: cosmo
+    include-in-header: google-verify.html
     css: styles.css
     toc: false
     smooth-scroll: true
