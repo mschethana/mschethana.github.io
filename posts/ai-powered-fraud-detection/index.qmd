@@ -12,6 +12,9 @@ toc: true
 format:
   html:
     css: styles.css
+    highlight-style: monokai
+    code-block-bg: true
+    code-overflow: wrap
 ---
 
 ::: {layout-ncol=2 .custom-metadata-grid}
@@ -28,30 +31,392 @@ June 18, 2026
 
 :::
 
-
 ## Introduction
 
 Traditional dashboards excel at answering *what happened*.
 
-But fraud investigators, the high stakes question is always:
+But for fraud investigators, the high-stakes question is always:
 
 > Why did this happen, and where should I look next?
 
-This project bridges that gap. By combining Power BI with an Isolation Forest anomaly detection model, Groq's Llama API, and native analytics like Key Influencers, this dashboard moves beyond basic reporting into automated, AI-powered explanation.
+This project bridges that gap - By combining Power BI with an Isolation Forest anomaly detection model, Groq's Llama API, and native analytics like Key Influencers, this dashboard moves beyond basic reporting into automated, AI-powered explanation.
+
+::: {.stats-corner}
+Anomaly detection rests on a simple statistical idea: fraud is rare, and rare events are easier to **isolate** than to **classify**. Rather than learning what fraud looks like (a supervised approach that needs labeled examples), an anomaly detector learns what "normal" looks like and flags whatever falls outside — the same logic behind control charts and z-score outlier tests in classical statistical process control.
+:::
 
 ## Solution Architecture
 
-![](Architecture.png){width=40% fig-align="center"}
+![](Architecture.png){width=10% fig-align="center"}
+
+The pipeline runs in four stages: synthetic claims data is generated in Python, scored by an Isolation Forest model, loaded into Power BI alongside the raw features, and then explained — first by Power BI's native Key Influencers visual, and second by a Groq-hosted Llama model that turns the numeric evidence into an investigator-readable narrative.
+
+::: {.stats-corner}
+The architecture treats the model's **contamination rate** — the assumed proportion of fraudulent claims in the population — as a tunable prior, not a fixed constant. Set it too high and investigators drown in false leads; set it too low and fraud hides comfortably inside the bulk of "normal" claims. Choosing this value is a precision/recall trade-off dressed up as a single parameter.
+:::
 
 ---
 
+## Creating Synthetic Claims Data
 
-## Fraud Dashboard
+Since real claims data is sensitive and rarely shareable, this project starts with a synthetic dataset built to mimic the shape of real insurance claims using parameters calibrated to:IRDAI Annual Report 2023-24 (fraud prevalence ~9%, vehicle type mix,claims ratio 82.52%, surveyor threshold ₹75,000) and IMF WEO April 2026 — India CPI & GDP growth (actual + projections) data. It has right-skewed claim amounts, a long tail of late-reported claims, and a small minority of fraud-correlated patterns rather than purely random noise.
+
+
+```python
+import pandas as pd
+import numpy as np
+from datetime import datetime, timedelta
+import random
+
+np.random.seed(42)
+random.seed(42)
+
+N = 15000
+
+# --- IMF WEO India macro data (actual + projected) ---
+macro = {
+    2015: {'cpi': 4.91, 'gdp_growth': 8.00},
+    2016: {'cpi': 4.94, 'gdp_growth': 8.26},
+    2017: {'cpi': 2.49, 'gdp_growth': 6.80},
+    2018: {'cpi': 4.86, 'gdp_growth': 6.45},
+    2019: {'cpi': 3.72, 'gdp_growth': 3.87},
+    2020: {'cpi': 6.62, 'gdp_growth': -5.83},  # COVID crash
+    2021: {'cpi': 5.13, 'gdp_growth': 9.05},   # rebound
+    2022: {'cpi': 6.70, 'gdp_growth': 7.24},   # inflation surge
+    2023: {'cpi': 5.65, 'gdp_growth': 8.20},
+    2024: {'cpi': 4.80, 'gdp_growth': 6.50},
+    2025: {'cpi': 4.20, 'gdp_growth': 6.20},
+    2026: {'cpi': 4.50, 'gdp_growth': 6.10},   # WEO April 2026 projection
+}
+
+insurers = [
+    'New India Assurance', 'ICICI Lombard', 'Bajaj Allianz',
+    'HDFC ERGO', 'Oriental Insurance', 'United India Insurance',
+    'National Insurance', 'Reliance General', 'SBI General', 'Tata AIG'
+]
+
+states = {
+    'Maharashtra': 0.13, 'Uttar Pradesh': 0.11, 'Tamil Nadu': 0.09,
+    'Karnataka': 0.08, 'Gujarat': 0.08, 'Rajasthan': 0.07,
+    'West Bengal': 0.06, 'Madhya Pradesh': 0.05, 'Delhi': 0.06,
+    'Andhra Pradesh': 0.05, 'Telangana': 0.05, 'Kerala': 0.04,
+    'Punjab': 0.03, 'Haryana': 0.03, 'Bihar': 0.03,
+    'Odisha': 0.02, 'Assam': 0.02, 'Jharkhand': 0.01
+}
+
+vehicle_types = ['Private Car', 'Two-Wheeler', 'Commercial Vehicle']
+vehicle_weights = [0.45, 0.40, 0.15]
+
+incident_types = ['Collision', 'Theft', 'Fire', 'Natural Disaster', 'Vandalism']
+incident_weights = [0.52, 0.22, 0.10, 0.10, 0.06]
+
+garage_types = ['Network Garage', 'Non-Network Garage', 'Cash Settlement']
+garage_weights = [0.50, 0.30, 0.20]
+
+# --- Generate claim dates (weighted toward recent years) ---
+start = datetime(2015, 1, 1)
+end   = datetime(2026, 12, 31)
+total_days = (end - start).days
+
+# Slight upward trend in volume over years
+year_weights = {y: 1.0 + (y - 2015) * 0.07 for y in range(2015, 2027)}
+dates = []
+for _ in range(N):
+    yr = np.random.choice(list(year_weights.keys()),
+                          p=np.array(list(year_weights.values())) /
+                            sum(year_weights.values()))
+    day_in_year = random.randint(0, 364)
+    d = datetime(yr, 1, 1) + timedelta(days=day_in_year)
+    if d > end:
+        d = end
+    dates.append(d)
+
+dates.sort()
+
+# --- Build rows ---
+rows = []
+for i, claim_date in enumerate(dates):
+    yr = claim_date.year
+
+    insurer       = np.random.choice(insurers)
+    state         = np.random.choice(list(states.keys()),
+                                     p=np.array(list(states.values()))/np.array(list(states.values())).sum())
+    vehicle_type  = np.random.choice(vehicle_types, p=vehicle_weights)
+    vehicle_age   = int(np.clip(np.random.exponential(4.5), 0, 20))
+    policy_age_m  = int(np.random.uniform(1, 60))
+    incident_type = np.random.choice(incident_types, p=incident_weights)
+    garage_type   = np.random.choice(garage_types,   p=garage_weights)
+    claims_12m    = int(np.random.poisson(0.30))
+    days_to_report= int(np.clip(np.random.exponential(6), 0, 120))
+    # Surveyor mandatory for claims > ₹75k (set after amount is calculated)
+
+    # Base claim amount — Gamma, INR
+    base_amount = np.random.gamma(shape=2.2, scale=42000)
+    base_amount = float(np.clip(base_amount, 5000, 800000))
+
+    # --- Fraud probability logic (additive, IRDAI-calibrated ~9% rate) ---
+    fp = 0.025  # base
+
+    if policy_age_m < 6:              fp += 0.12
+    if garage_type == 'Cash Settlement': fp += 0.10
+    if incident_type in ('Theft','Fire'): fp += 0.08
+    if claims_12m >= 3:               fp += 0.15
+    if days_to_report > 30:           fp += 0.07
+    if vehicle_age > 12:              fp += 0.06
+    if vehicle_type == 'Commercial Vehicle': fp += 0.04
+    # Macro: high inflation & GDP contraction years raise fraud
+    cpi = macro[yr]['cpi']
+    gdp = macro[yr]['gdp_growth']
+    if cpi > 6.0:                     fp += 0.04
+    if gdp < 0:                       fp += 0.06   # COVID year
+
+    fp = min(fp, 0.92)
+    fraud_flag = int(np.random.binomial(1, fp))
+
+    # Inflate claim amount for fraudulent claims
+    if fraud_flag == 1:
+        base_amount *= np.random.uniform(2.5, 7.0)
+        base_amount = min(base_amount, 1500000)
+
+    claim_amount = round(base_amount, 2)
+    surveyor_flag = 1 if claim_amount > 75000 else 0
+
+    rows.append({
+        'claim_id':            f'CLM-{i+1:06d}',
+        'claim_date':          claim_date.strftime('%Y-%m-%d'),
+        'claim_year':          yr,
+        'claim_month':         claim_date.month,
+        'insurer':             insurer,
+        'state':               state,
+        'vehicle_type':        vehicle_type,
+        'vehicle_age_years':   vehicle_age,
+        'policy_age_months':   policy_age_m,
+        'incident_type':       incident_type,
+        'garage_type':         garage_type,
+        'claim_amount_inr':    claim_amount,
+        'claims_last_12m':     claims_12m,
+        'days_to_report':      days_to_report,
+        'surveyor_flag':       surveyor_flag,
+        'india_cpi':           macro[yr]['cpi'],
+        'india_gdp_growth':    macro[yr]['gdp_growth'],
+        'fraud_flag':          fraud_flag,
+    })
+
+df = pd.DataFrame(rows)
+
+# Quick sanity checks
+fraud_rate = df['fraud_flag'].mean()
+print(f"Total rows        : {len(df)}")
+print(f"Fraud rate        : {fraud_rate:.2%}")
+print(f"Date range        : {df['claim_date'].min()} → {df['claim_date'].max()}")
+print(f"Avg claim (legit) : ₹{df[df['fraud_flag']==0]['claim_amount_inr'].mean():,.0f}")
+print(f"Avg claim (fraud) : ₹{df[df['fraud_flag']==1]['claim_amount_inr'].mean():,.0f}")
+print(f"Fraud by year:\n{df.groupby('claim_year')['fraud_flag'].mean().round(3)}")
+
+df.to_csv('/mnt/user-data/outputs/india_insurance_claims_synthetic.csv', index=False)
+print("\nSaved to outputs.")
+```
+
+<!-- ![](synthetic_data_sample.png) -->
+
+::: {.stats-corner}
+If fraud rows were just random noise, no model (statistical or otherwise) would have anything structural to learn. Correlating fraud with a handful of skewed features (inflated amounts, delayed reporting) mimics the heavy-tailed distributions seen in real claims data, which is exactly the structure Isolation Forest is built to exploit.
+:::
+
+---
+
+## Machine Learning with Isolation Forest
+
+Isolation Forest was chosen over a supervised classifier for three reasons: it needs no fraud labels, it scales well to high-dimensional feature sets, and it scores every claim on a continuous spectrum of "how unusual" rather than a binary cut.
+
+```python
+import pandas as pd
+from sklearn.ensemble import IsolationForest
+from sklearn.preprocessing import StandardScaler
+
+df = dataset.copy()
+
+# Handle the Microsoft.OleDb.Date type by converting to string first
+# then extracting just the date portion
+df['claim_date'] = df['claim_date'].astype(str).str[:10]
+
+features = [
+    'claim_amount_inr',
+    'vehicle_age_years',
+    'policy_age_months',
+    'claims_last_12m',
+    'days_to_report',
+    'india_cpi',
+    'india_gdp_growth',
+]
+
+X = StandardScaler().fit_transform(df[features])
+
+# Explicitly fit first, then call decision_function and predict separately
+model = IsolationForest(contamination=0.10, random_state=42)
+model.fit(X)
+
+df['anomaly_score'] = model.decision_function(X).round(4)
+df['anomaly_flag']  = (model.predict(X) == -1).astype(int)
+
+def risk_label(score):
+    if score < -0.025:   return 'High Risk'
+    elif score < 0.05: return 'Medium Risk'
+    else:               return 'Low Risk'
+
+df['risk_level'] = df['anomaly_score'].apply(risk_label)
+
+dataset = df
+```
+
+::: {.stats-corner}
+Isolation Forest works like a randomized game of twenty questions. Each tree splits the data on random features at random thresholds, and outliers — sitting far from the crowd — tend to get separated from everyone else in far fewer splits than normal points do. Average that "path length" across the forest, and a short average path becomes the statistical signature of an anomaly.
+:::
+
+---
+
+## Gen AI Insights using Groq API
+
+A numeric anomaly score tells an investigator *that* something is unusual, not *why*. To close that gap, the top 20 flagged claim's score and feature values are passed to a Llama model hosted on Groq, which returns a short, plain-English explanation grounded in the actual numbers rather than a free-form guess.
+
+```python
+import pandas as pd
+import os
+from groq import Groq
+
+client = Groq(api_key=os.environ['GROQ_API_KEY'])
+df = dataset.copy()
+
+top_claims = set(
+    df.sort_values('anomaly_score')
+      .head(20)['claim_id']
+)
+
+def get_insight(row):
+
+    if row['claim_id'] not in top_claims:
+        return 'AI analysis not requested.'
+
+    # Skip non-anomalies
+    if row['anomaly_flag'] == 0:
+        return 'No anomaly detected.'
+
+    prompt = f"""
+You are an insurance fraud analyst.
+
+Write exactly 2 concise sentences explaining why this motor insurance claim appears suspicious.
+
+Claim Amount: INR {row['claim_amount_inr']:,.0f}
+Policy Age: {row['policy_age_months']} months
+Prior Claims: {row['claims_last_12m']}
+Days To Report: {row['days_to_report']}
+Vehicle Age: {row['vehicle_age_years']} years
+Incident Type: {row['incident_type']}
+Garage Type: {row['garage_type']}
+India CPI: {row['india_cpi']}
+India GDP Growth: {row['india_gdp_growth']}
+Anomaly Score: {row['anomaly_score']}
+Risk Level: {row['risk_level']}
+"""
+
+    try:
+        response = client.chat.completions.create(
+            model="llama-3.1-8b-instant",
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            temperature=0.3,
+            max_tokens=80
+        )
+
+        return response.choices[0].message.content.strip()
+
+    except Exception as e:
+        return f"Insight unavailable: {str(e)}"
+
+print("Generating AI insights for flagged claims...")
+
+df['ai_insight'] = df.apply(get_insight, axis=1)
+
+flagged = int(df['anomaly_flag'].sum())
+df['ai_analysis_requested'] = df['claim_id'].isin(top_claims)
+
+print(f"Done. Insights generated for {flagged} flagged claims.")
+```
+
+![](Claim_specific_AI_insight.png)
+
+::: {.stats-corner}
+`temperature=0.3` is a statistical choice, not a stylistic one — it narrows the model's output distribution so the same claim produces a consistent explanation run to run, much like reducing variance in a noisy estimator. Just as important: the prompt hands the model the actual feature values and score instead of asking it to infer them, grounding the generated text in evidence rather than letting it hallucinate a plausible-sounding story.
+:::
+
+---
+
+## Dashboard Design
 
 ![](Fraud_Overview.png)
 
+Key KPI cards summarize claim volumes, known fraud cases, machine-learning flagged claims, and median claim amounts. Visualizations highlight the geographic distribution of fraud, yearly trends between inflation (CPI) and anomaly scores, and the relationship between GDP growth, claim amounts, and risk categories. A built-in Key Influencers analysis explains the factors driving anomaly flags, revealing that customers with more than two claims in the previous 12 months are significantly more likely to be classified as suspicious. Together, the dashboard enables insurers to monitor fraud patterns, understand risk drivers, and support data-driven investigation decisions.
+
+
+::: {.stats-corner}
+Power BI's Key Influencers visual isn't magic — under the hood it runs a sequence of statistical tests (chi-square for categorical splits, a step-wise logistic regression for continuous ones) to measure each candidate field's marginal association with the target, then ranks fields by effect size. It's a lightweight, point-and-click cousin of the feature-importance techniques used to interpret the Isolation Forest itself.
+:::
+
 ---
 
-## AI Insights
+## Smart Narrative vs Generative AI
 
-![](AI_Insights.png)
+Power BI ships with a built-in Smart Narrative visual, and it's worth being precise about how that differs from the Groq-powered explanations above — they look similar on the surface but work in fundamentally different ways.
+
+| | Smart Narrative (Power BI native) | Gen AI Insight (Groq + Llama) |
+|---|---|---|
+| **How it works** | Fills pre-built phrase templates with computed aggregates | Reasons freely over the supplied numbers in natural language |
+| **Flexibility** | Fixed sentence structures, limited vocabulary | Open-ended phrasing, can adapt tone and emphasis |
+| **Grounding** | Always numerically exact (it's just string interpolation) | Numerically grounded only if the prompt supplies the values |
+| **Best for** | Fast, reliable summary stats on any page | Investigator-style reasoning about *why* a specific claim looks risky |
+
+::: {.stats-corner}
+Strip away the branding and the line between the two is really "rule-based string interpolation over computed statistics" versus "a language model conditioned on those same statistics." Same underlying numbers, different layer of abstraction on top.
+:::
+
+---
+
+## Sample AI Explanation
+
+Here's one flagged claim end to end — the model's verdict, followed by the generated explanation an investigator would actually read.
+
+**Claim:** \ Rs 1112308.25 · vehicle age is 20 years · 13-month-old policy · submitted in 2020 with a GDP growth rate of -6%
+**Anomaly score:** -0.14 (High)
+
+> *The motor insurance claim appears suspicious due to the unusually high claim amount of INR 1,112,308 for a 13-month-old policy with no prior claims, suggesting potential exaggeration or fabrication. Additionally, the vehicle's 20-year age and the current economic downturn in India (negative GDP growth of -6%) may indicate that the claimant is taking advantage of the financial strain to inflate*
+
+---
+
+## Key Learnings
+
+- Unsupervised models live or die by the **contamination** assumption — it deserves as much tuning attention as any supervised hyperparameter.
+- An LLM explanation is only as trustworthy as the numbers it's grounded in; ungrounded prompts invite confident-sounding hallucination.
+- Power BI's native Key Influencers is a strong complement to a custom model, not a replacement — it's fast to read but shallower than a purpose-built detector.
+- Synthetic data design matters more than expected: correlated, skewed features make for a far more convincing demo than uniform random noise.
+
+::: {.stats-corner}
+The single biggest lesson was really about precision and recall in disguise: every contamination value tested traded false leads for missed fraud somewhere on that curve, and no single number was "correct" — only better or worse suited to how much investigator time the team actually had.
+:::
+
+---
+
+## Future Improvements
+
+- Replace synthetic labels with real (or real-adjacent) outcomes and benchmark against a supervised ensemble.
+- Build a feedback loop so investigator dispositions (confirmed fraud / false positive) retrain the model over time.
+- Calibrate raw anomaly scores into true probabilities, since Isolation Forest scores are a ranking, not a probability, out of the box.
+- Extend the Groq prompt with case history and prior similar claims for richer context.
+- Add SHAP-based explainability alongside Key Influencers for a second, model-native view of "why."
+
+::: {.stats-corner}
+That calibration point is worth dwelling on: an Isolation Forest score tells you claim A is *more* anomalous than claim B, but not that claim A has a "73% chance of being fraud." Getting from a ranking to a calibrated probability needs an extra step — typically Platt scaling or isotonic regression fit against some ground truth.
+:::
