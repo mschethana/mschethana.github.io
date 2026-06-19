@@ -9,24 +9,31 @@ categories:
   - Portfolio Project
 image: hero.png
 toc: true
+execute:
+  eval: false
 format:
   html:
-    css: styles.css
+    css: style.css
     highlight-style: monokai
     code-block-bg: true
     code-overflow: wrap
+    code-fold: true
+    code-summary: "Show code"
+    code-tools: false
 ---
 
 ::: {layout-ncol=2 .custom-metadata-grid}
 
 ::: {.justify-left}
-**Author:**  
+<div class="meta-label">Author:</div>
+<div class="meta-value">
 [Chethana M S](https://www.linkedin.com/in/mschethana/)
+</div>
 :::
 
 ::: {.text-end}
-**PUBLISHED**  
-June 18, 2026
+<div class="meta-label">Published</div>
+<div class="meta-value">June 18, 2026</div>
 :::
 
 :::
@@ -47,7 +54,7 @@ Anomaly detection rests on a simple statistical idea: fraud is rare, and rare ev
 
 ## Solution Architecture
 
-![](Architecture.png){width=10% fig-align="center"}
+![](Architecture.png){width=30% fig-align="center"}
 
 The pipeline runs in four stages: synthetic claims data is generated in Python, scored by an Isolation Forest model, loaded into Power BI alongside the raw features, and then explained — first by Power BI's native Key Influencers visual, and second by a Groq-hosted Llama model that turns the numeric evidence into an investigator-readable narrative.
 
@@ -62,7 +69,7 @@ The architecture treats the model's **contamination rate** — the assumed propo
 Since real claims data is sensitive and rarely shareable, this project starts with a synthetic dataset built to mimic the shape of real insurance claims using parameters calibrated to:IRDAI Annual Report 2023-24 (fraud prevalence ~9%, vehicle type mix,claims ratio 82.52%, surveyor threshold ₹75,000) and IMF WEO April 2026 — India CPI & GDP growth (actual + projections) data. It has right-skewed claim amounts, a long tail of late-reported claims, and a small minority of fraud-correlated patterns rather than purely random noise.
 
 
-```python
+```{python}
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
@@ -213,8 +220,6 @@ print(f"Avg claim (legit) : ₹{df[df['fraud_flag']==0]['claim_amount_inr'].mean
 print(f"Avg claim (fraud) : ₹{df[df['fraud_flag']==1]['claim_amount_inr'].mean():,.0f}")
 print(f"Fraud by year:\n{df.groupby('claim_year')['fraud_flag'].mean().round(3)}")
 
-df.to_csv('/mnt/user-data/outputs/india_insurance_claims_synthetic.csv', index=False)
-print("\nSaved to outputs.")
 ```
 
 <!-- ![](synthetic_data_sample.png) -->
@@ -229,7 +234,7 @@ If fraud rows were just random noise, no model (statistical or otherwise) would 
 
 Isolation Forest was chosen over a supervised classifier for three reasons: it needs no fraud labels, it scales well to high-dimensional feature sets, and it scores every claim on a continuous spectrum of "how unusual" rather than a binary cut.
 
-```python
+```{python}
 import pandas as pd
 from sklearn.ensemble import IsolationForest
 from sklearn.preprocessing import StandardScaler
@@ -279,7 +284,7 @@ Isolation Forest works like a randomized game of twenty questions. Each tree spl
 
 A numeric anomaly score tells an investigator *that* something is unusual, not *why*. To close that gap, the top 20 flagged claim's score and feature values are passed to a Llama model hosted on Groq, which returns a short, plain-English explanation grounded in the actual numbers rather than a free-form guess.
 
-```python
+```{python}
 import pandas as pd
 import os
 from groq import Groq

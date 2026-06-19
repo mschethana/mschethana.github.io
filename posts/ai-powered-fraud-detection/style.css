@@ -1,5 +1,6 @@
 /* Google Fonts — sophisticated serif for headings, monospace for code */
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&display=swap');
 
 /* ==========================================================================
    DESIGN TOKENS
@@ -16,90 +17,141 @@
   --color-gold-soft: rgba(201, 168, 118, 0.10);
 }
 
-/* ==========================================================================
-   POST TITLE BLOCK (CENTERED, SERIF)
-   Styles Quarto's own title block instead of hiding it, so the title,
-   subtitle and category badges that come from the YAML front matter all
-   render through one consistent system.
-   ========================================================================== */
+/*==================================================
+  TITLE BLOCK
+==================================================*/
 
-#title-block-header.quarto-title-block {
-  text-align: center !important;
-  max-width: 720px !important;
-  margin: 2.5rem auto 1.5rem !important;
+#title-block-header {
+    width: 100%;
 }
 
-#title-block-header .title {
-  font-family: 'Playfair Display', Georgia, serif !important;
-  font-weight: 700 !important;
-  font-size: 2.75rem !important;
-  line-height: 1.15 !important;
-  color: var(--color-heading) !important;
-  text-align: center !important;
-  margin-bottom: 0.5rem !important;
+#title-block-header .quarto-title {
+
+    display: flex !important;
+    flex-direction: column !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    text-align: center !important;
+
+    margin: 0 auto 2rem auto !important;
+    max-width: 850px !important;
 }
 
-#title-block-header .subtitle {
-  font-family: 'Playfair Display', Georgia, serif !important;
-  font-style: italic !important;
-  font-weight: 400 !important;
-  font-size: 1.4rem !important;
-  color: var(--color-muted) !important;
-  text-align: center !important;
-  margin-bottom: 1.25rem !important;
+#title-block-header h1.title {
+
+    width: 100% !important;
+
+    text-align: center !important;
+
+    font-family: 'Playfair Display', serif !important;
+
+    font-size: 3rem !important;
+
+    font-weight: 700 !important;
+
+    line-height: 1.15 !important;
+
+    color: var(--color-heading);
+
+    margin-bottom: .6rem !important;
 }
 
-#title-block-header .quarto-categories {
-  display: flex !important;
-  justify-content: center !important;
-  flex-wrap: wrap !important;
-  gap: 0.5rem !important;
+#title-block-header p.subtitle {
+
+    width: 100% !important;
+
+    text-align: center !important;
+
+    font-family: 'Playfair Display', serif !important;
+
+    font-style: italic;
+
+    font-size: 1.4rem;
+
+    color: var(--color-muted);
+
+    margin-bottom: 1rem !important;
 }
 
-#title-block-header .quarto-category {
-  font-size: 0.7rem !important;
-  letter-spacing: 0.06em !important;
-}
+/* category tags */
 
-@media (max-width: 640px) {
-  #title-block-header .title { font-size: 2rem !important; }
-  #title-block-header .subtitle { font-size: 1.1rem !important; }
+#title-block-header .quarto-categories{
+
+    justify-content:center !important;
+
+    width:100%;
 }
 
 /* ==========================================================================
    SPLIT METADATA GRID (AUTHOR LEFT / PUBLISHED RIGHT)
    ========================================================================== */
 
+
 .custom-metadata-grid {
-  margin-top: 20px !important;
-  margin-bottom: 25px !important;
-  padding-bottom: 15px !important;
-  border-bottom: 1px solid var(--color-border) !important;
-  font-family: system-ui, -apple-system, sans-serif !important;
-  font-size: 0.85rem !important;
-  color: var(--color-muted) !important;
+
+    margin-top: 0.8rem !important;
+    margin-bottom: 3rem !important;
+
+    padding-bottom: 1.5rem !important;
+
+    border-bottom: 1px solid rgba(255,255,255,.08);
+
+    color: var(--color-muted);
+
+    font-family: "Inter", sans-serif !important;
+    row-gap:.5rem !important;
 }
+
+
+/* AUTHOR / PUBLISHED */
 
 .custom-metadata-grid strong {
-  font-size: 0.75rem !important;
-  text-transform: uppercase !important;
-  letter-spacing: 1px !important;
-  color: var(--color-faint) !important;
-  display: block !important;
-  margin-bottom: 4px !important;
+
+  font-family: Georgia, "Times New Roman", serif !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    color: var(--color-faint) !important;
+
+    margin-bottom: 0.05rem !important;
+    display: block !important;
 }
 
-.custom-metadata-grid a {
-  color: var(--color-heading) !important;
-  text-decoration: none !important;
-  font-weight: 500 !important;
-  border-bottom: 1px dotted var(--color-faint) !important;
-  transition: color 0.2s ease !important;
+
+/* Author name + date */
+
+.custom-metadata-grid a,
+.custom-metadata-grid .text-end {
+
+    font-size: 1.08rem !important;
+
+    font-weight: 500;
+
+    color: #dbe4ee !important;
+
+    text-decoration: none !important;
+
+    line-height: 1.3;
+}
+
+.custom-metadata-grid p{
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    line-height: 1.05 !important;
 }
 
 .custom-metadata-grid a:hover {
-  color: var(--color-blue) !important;
-  border-bottom: 1px solid var(--color-blue) !important;
+
+    color: white !important;
+
+    border-bottom: 1px dotted rgba(255,255,255,.25);
+}
+
+.custom-metadata-grid strong{
+    margin-bottom:.1rem !important;
 }
 
 /* ==========================================================================
@@ -160,39 +212,59 @@
   margin: 0 1.1rem 1.1rem !important;
 }
 
-/* ==========================================================================
-   STATISTICS CORNER CALLOUT
-   Usage in .qmd:
-     ::: {.stats-corner}
-     Your explanation text here.
-     :::
-   ========================================================================== */
+
+/*==================================================
+  STATISTICS CORNER
+==================================================*/
 
 .stats-corner {
-  position: relative;
-  margin: 2rem 0 !important;
-  padding: 1.1rem 1.4rem 1.1rem 1.6rem !important;
-  background: linear-gradient(135deg, var(--color-gold-soft), transparent) !important;
-  border-left: 3px solid var(--color-gold) !important;
-  border-radius: 0 6px 6px 0 !important;
-  font-size: 0.95rem !important;
-  color: var(--color-muted) !important;
+
+    position: relative;
+
+    margin: 2.5rem 0;
+
+    padding: 2rem 2.4rem;
+
+    background: linear-gradient(
+        180deg,
+        rgba(17,24,39,.95),
+        rgba(13,20,36,.98)
+    );
+
+    border: 2px solid rgba(201,168,118,.55);
+
+    border-radius: 38px;
+
+    box-shadow:
+        inset 0 0 0 5px rgba(255,255,255,.03),
+        0 0 25px rgba(201,168,118,.18);
+
+    color: var(--color-muted);
+
+    font-size: .98rem;
+
+    line-height: 1.8;
 }
+
+
+/* label */
 
 .stats-corner::before {
-  content: "\03A3  Statistics Corner";
-  display: block;
-  font-family: system-ui, -apple-system, sans-serif !important;
-  font-size: 0.7rem !important;
-  font-weight: 700 !important;
-  letter-spacing: 1.5px !important;
-  text-transform: uppercase !important;
-  color: var(--color-gold) !important;
-  margin-bottom: 0.5rem !important;
-}
 
-.stats-corner p:last-child {
-  margin-bottom: 0 !important;
+    content: "💡 STATISTICS CORNER";
+
+    display: block;
+
+    margin-bottom: 1rem;
+
+    font-size: .78rem;
+
+    letter-spacing: 2px;
+
+    font-weight: 700;
+
+    color: var(--color-gold);
+
 }
 
 /* ==========================================================================
@@ -284,4 +356,24 @@ p code:not(.sourceCode code), li code:not(.sourceCode code) {
 
 .custom-header-container {
   display: none !important;
+}
+
+h2{
+    margin-top: 4.5rem !important;
+    margin-bottom: 1rem !important;
+}
+
+.meta-label{
+    font-family: Georgia, serif;
+    font-size:.9rem;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:var(--color-faint);
+    margin-bottom:.1rem;
+}
+
+.meta-value{
+    font-size:1.08rem;
+    color:#dbe4ee;
+    line-height:1.2;
 }

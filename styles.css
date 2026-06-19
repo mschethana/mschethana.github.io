@@ -401,52 +401,108 @@ ul li {
   text-decoration: none;
   font-size: 0.9rem;
 }
-/* Custom highlighting for the listing card blocks */
-.quarto-listing-container-grid .grid .g-col-12 {
-  background-color: #0d1527 !important; /* Rich, deep slate-blue/dark background */
-  border: 1px solid #1e293b !important;  /* Elegant, subtle border outline */
-  border-radius: 12px !important;        /* Smooth, modern rounded corners */
-  overflow: hidden !important;           /* Ensures the image respects the border corners */
-  padding: 0 !important;                 /* Removes awkward padding around the image */
-  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), 
-              box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+/* ======================================================
+   BLOG CARDS
+====================================================== */
+
+.quarto-grid-item {
+    background: linear-gradient(
+        180deg,
+        #111827 0%,
+        #0f172a 100%
+    ) !important;
+
+    min-width: 340px;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 18px !important;
+
+    overflow: hidden;
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        border-color .3s ease;
 }
 
-/* Add a hover effect to make the cards interactive */
-.quarto-listing-container-grid .grid .g-col-12:hover {
-  transform: translateY(-6px);
-  border-color: #3b82f6 !important;     /* Subtle modern blue highlight on hover */
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5) !important;
+.quarto-grid-item:hover {
+
+    transform: translateY(-6px);
+
+    border-color: rgba(201,168,118,.45);
+
+    box-shadow:
+      0 10px 30px rgba(0,0,0,.4),
+      0 0 20px rgba(201,168,118,.08);
+
 }
 
-.quarto-listing-container-grid .grid .g-col-12 .quarto-grid-item .quarto-grid-link .listing-item-img {
-  width: 100% !important;
-  height: 200px !important;              /* Uniform height for a symmetrical look */
-  object-fit: cover !important;          /* Prevents image distortion */
-  border-bottom: 1px solid #1e293b;     /* Clean divider line below the image */
+/* image */
+
+.listing-item-img {
+
+    height: 210px !important;
+    width: 100% !important;
+
+    object-fit: cover;
+
+    border-bottom: 1px solid rgba(255,255,255,.08);
 }
 
-.quarto-listing-container-grid .grid .g-col-12 .quarto-grid-item .card-body {
-  background-color: transparent !important; /* Vaporizes the default white background */
-  padding: 20px !important;                 /* Gives text comfortable breathing room */
+/* body */
+
+.quarto-grid-item .card-body {
+
+    padding: 1.5rem !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
 }
 
-/* Ensure the title inside the card uses a sophisticated look */
+/* title */
+
 .listing-title {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-weight: 700 !important;
-  font-size: 1.4rem !important;
-  color: #f8fafc !important;                /* Crisp off-white color for premium readability */
-  margin-bottom: 8px !important;
-  text-decoration: none !important;
+
+    font-family: "Cormorant Garamond", serif !important;
+
+    font-size: 2rem !important;
+
+    font-weight: 600 !important;
+
+    line-height: 1.1;
+
+    color: #f8fafc !important;
+
+    margin-bottom: .8rem;
 }
 
-/* Ensure the subtitle inside the card matches cleanly */
+/* subtitle */
+
 .listing-subtitle {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: 0.95rem !important;
-  font-weight: 400 !important;
-  color: #94a3b8 !important;                /* Balanced slate-gray text color */
-  font-style: normal !important;            /* Clean, modern sans-serif aesthetic */
-  line-height: 1.4 !important;
+
+    font-family: Inter, sans-serif;
+
+    font-size: .95rem !important;
+
+    color: #94a3b8 !important;
+
+    line-height: 1.7;
+}
+
+/* remove white backgrounds */
+
+.card,
+.card-body {
+
+    background: transparent !important;
+
+}
+.quarto-grid-item .listing-title,
+.quarto-grid-item .listing-subtitle {
+
+    text-align: center !important;
+    width: 100% !important;
+
 }
