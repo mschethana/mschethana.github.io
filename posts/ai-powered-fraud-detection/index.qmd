@@ -2,7 +2,6 @@
 title: "From Score to Story"
 subtitle: "AI-Powered Fraud Detection in Power BI"
 categories:
-  - Power BI
   - Machine Learning
   - Generative AI
   - Fraud Detection
