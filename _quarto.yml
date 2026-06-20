@@ -42,4 +42,4 @@ format:
     smooth-scroll: true
 
 execute:
-  freeze: auto
+  eval: false

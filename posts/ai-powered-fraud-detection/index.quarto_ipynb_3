@@ -74,7 +74,7 @@
         "\n",
         "Since real claims data is sensitive and rarely shareable, this project starts with a synthetic dataset built to mimic the shape of real insurance claims using parameters calibrated to:IRDAI Annual Report 2023-24 (fraud prevalence ~9%, vehicle type mix,claims ratio 82.52%, surveyor threshold ₹75,000) and IMF WEO April 2026 — India CPI & GDP growth (actual + projections) data. It has right-skewed claim amounts, a long tail of late-reported claims, and a small minority of fraud-correlated patterns rather than purely random noise.\n"
       ],
-      "id": "e77aff5a"
+      "id": "5905f566"
     },
     {
       "cell_type": "code",
@@ -230,7 +230,7 @@
         "print(f\"Avg claim (fraud) : ₹{df[df['fraud_flag']==1]['claim_amount_inr'].mean():,.0f}\")\n",
         "print(f\"Fraud by year:\\n{df.groupby('claim_year')['fraud_flag'].mean().round(3)}\")"
       ],
-      "id": "9e97bf1a",
+      "id": "27bd2a3d",
       "execution_count": null,
       "outputs": []
     },
@@ -250,7 +250,7 @@
         "\n",
         "Isolation Forest was chosen over a supervised classifier for three reasons: it needs no fraud labels, it scales well to high-dimensional feature sets, and it scores every claim on a continuous spectrum of \"how unusual\" rather than a binary cut."
       ],
-      "id": "d8587c48"
+      "id": "5fe4afb7"
     },
     {
       "cell_type": "code",
@@ -294,7 +294,7 @@
         "\n",
         "dataset = df"
       ],
-      "id": "c69a01cf",
+      "id": "f8982fd0",
       "execution_count": null,
       "outputs": []
     },
@@ -312,7 +312,7 @@
         "\n",
         "A numeric anomaly score tells an investigator *that* something is unusual, not *why*. To close that gap, the top 20 flagged claim's score and feature values are passed to a Llama model hosted on Groq, which returns a short, plain-English explanation grounded in the actual numbers rather than a free-form guess."
       ],
-      "id": "2f8f39b8"
+      "id": "5897d871"
     },
     {
       "cell_type": "code",
@@ -384,7 +384,7 @@
         "\n",
         "print(f\"Done. Insights generated for {flagged} flagged claims.\")"
       ],
-      "id": "be01ef24",
+      "id": "2e45d8fa",
       "execution_count": null,
       "outputs": []
     },
@@ -466,7 +466,7 @@
         "That calibration point is worth dwelling on: an Isolation Forest score tells you claim A is *more* anomalous than claim B, but not that claim A has a \"73% chance of being fraud.\" Getting from a ranking to a calibrated probability needs an extra step — typically Platt scaling or isotonic regression fit against some ground truth.\n",
         ":::"
       ],
-      "id": "b5d4be30"
+      "id": "3a185325"
     }
   ],
   "metadata": {
