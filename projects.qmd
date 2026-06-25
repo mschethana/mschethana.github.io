@@ -13,9 +13,9 @@ A Python-based intelligent matching system to standardize and reconcile inconsis
 
 ::: {.project-card}
 ### Anomaly Detection & Analytics
-Currently in progress -- coming soon!
+Built an end-to-end fraud detection solution that combines Isolation Forest anomaly detection, LLM-generated explanations and Power BI analytics  to transform suspicious insurance claims into investigator-readable narratives.
 
-[View on GitHub →](#){.project-button}
+[View on GitHub →](https://github.com/mschethana/Score-to-Story-Fraud-Detection){.project-button}
 :::
 
 :::
