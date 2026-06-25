@@ -222,9 +222,9 @@ June 18, 2026
 <blockquote class="blockquote">
 <p>Why did this happen, and where should I look next?</p>
 </blockquote>
-<p>This project bridges that gap - By combining Power BI with an Isolation Forest anomaly detection model, Groq’s Llama API, and native analytics like Key Influencers, this dashboard moves beyond basic reporting into automated, AI-powered explanation.</p>
+<p>This project bridges that gap! - By combining Power BI with an Isolation Forest anomaly detection model, Groq’s Llama API, and Power BI’s native analytics like Key Influencers and smart narratives, this dashboard moves beyond basic reporting into automated, AI-powered explanation.</p>
 <div class="stats-corner">
-<p>Anomaly detection rests on a simple statistical idea: fraud is rare, and rare events are easier to <strong>isolate</strong> than to <strong>classify</strong>. Rather than learning what fraud looks like (a supervised approach that needs labeled examples), an anomaly detector learns what “normal” looks like and flags whatever falls outside — the same logic behind control charts and z-score outlier tests in classical statistical process control.</p>
+<p>Anomaly detection rests on a simple statistical idea: fraud is rare, and rare events tend to stand out from normal patterns. In statistics, we often hear the term “outliers” – any observation that falls unusually far from the rest of the data points is considered an outlier. Traditional statistical techniques for identifying outliers include Z-scores and IQR (Interquartile Range). But in the real world, multiple features are often interdependent. Individually, each feature may appear perfectly normal, but when considered together, their combined effect may deviate significantly from expected patterns. This is where anomaly detection comes into play. An anomaly can be thought of as a multidimensional extension of the traditional concept of an outlier – Instead of examining a single variable, anomaly detection evaluates patterns across multiple variables and identifies observations that deviate from normal behavior.</p>
 </div>
 </section>
 <section id="solution-architecture" class="level2">
@@ -234,7 +234,7 @@ June 18, 2026
 <p><img src="Architecture.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:30.0%"></p>
 </figure>
 </div>
-<p>The pipeline runs in four stages: synthetic claims data is generated in Python, scored by an Isolation Forest model, loaded into Power BI alongside the raw features, and then explained — first by Power BI’s native Key Influencers visual, and second by a Groq-hosted Llama model that turns the numeric evidence into an investigator-readable narrative.</p>
+<p>The pipeline runs in five stages: synthetic claims data is generated in Python, anomalies are detected using an Isolation Forest model, risk scores are assigned based on the anomaly score distribution, and the results are loaded into Power BI alongside the raw features. These results are then explained in two ways—first through Power BI’s native Key Influencers visual, and second through a Groq-hosted Llama model that transforms the numeric evidence into an investigator-readable narrative.</p>
 <div class="stats-corner">
 <p>The architecture treats the model’s <strong>contamination rate</strong> — the assumed proportion of fraudulent claims in the population — as a tunable prior, not a fixed constant. Set it too high and investigators drown in false leads; set it too low and fraud hides comfortably inside the bulk of “normal” claims. Choosing this value is a precision/recall trade-off dressed up as a single parameter.</p>
 </div>
