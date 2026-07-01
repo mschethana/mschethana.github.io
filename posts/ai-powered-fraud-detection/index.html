@@ -156,6 +156,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#solution-architecture" id="toc-solution-architecture" class="nav-link" data-scroll-target="#solution-architecture">Solution Architecture</a></li>
   <li><a href="#creating-synthetic-claims-data" id="toc-creating-synthetic-claims-data" class="nav-link" data-scroll-target="#creating-synthetic-claims-data">Creating Synthetic Claims Data</a></li>
+  <li><a href="#isolation-forest-for-anomaly-detection" id="toc-isolation-forest-for-anomaly-detection" class="nav-link" data-scroll-target="#isolation-forest-for-anomaly-detection">Isolation Forest for Anomaly Detection</a></li>
   <li><a href="#gen-ai-insights-using-groq-api" id="toc-gen-ai-insights-using-groq-api" class="nav-link" data-scroll-target="#gen-ai-insights-using-groq-api">Gen AI Insights using Groq API</a></li>
   <li><a href="#dashboard-design" id="toc-dashboard-design" class="nav-link" data-scroll-target="#dashboard-design">Dashboard Design</a></li>
   <li><a href="#smart-narrative-vs-generative-ai" id="toc-smart-narrative-vs-generative-ai" class="nav-link" data-scroll-target="#smart-narrative-vs-generative-ai">Smart Narrative vs Generative AI</a></li>
@@ -222,7 +223,7 @@ June 18, 2026
 <blockquote class="blockquote">
 <p>Why did this happen, and where should I look next?</p>
 </blockquote>
-<p>This project bridges that gap! - By combining Power BI with an Isolation Forest anomaly detection model, Groq’s Llama API, and Power BI’s native analytics like Key Influencers and smart narratives, this dashboard moves beyond basic reporting into automated, AI-powered explanation.</p>
+<p>This project bridges that gap by combining machine learning, generative AI, and business intelligence to create an explainable anomaly detection solution. An Isolation Forest model identifies potentially fraudulent or unusual insurance claims, Groq’s Llama API provides contextual explanations for each anomaly, and Power BI delivers interactive analytics through dashboards, Key Influencers, and Smart Narratives. Rather than simply detecting anomalies, the solution focuses on making AI-driven insights interpretable and actionable for business users.</p>
 <div class="stats-corner">
 <p>Anomaly detection rests on a simple statistical idea: fraud is rare, and rare events tend to stand out from normal patterns. In statistics, we often hear the term “outliers” – any observation that falls unusually far from the rest of the data points is considered an outlier. Traditional statistical techniques for identifying outliers include Z-scores and IQR (Interquartile Range). But in the real world, multiple features are often interdependent. Individually, each feature may appear perfectly normal, but when considered together, their combined effect may deviate significantly from expected patterns. This is where anomaly detection comes into play. An anomaly can be thought of as a multidimensional extension of the traditional concept of an outlier – Instead of examining a single variable, anomaly detection evaluates patterns across multiple variables and identifies observations that deviate from normal behavior.</p>
 </div>
@@ -234,7 +235,7 @@ June 18, 2026
 <p><img src="Architecture.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:30.0%"></p>
 </figure>
 </div>
-<p>The pipeline runs in five stages: synthetic claims data is generated in Python, anomalies are detected using an Isolation Forest model, risk scores are assigned based on the anomaly score distribution, and the results are loaded into Power BI alongside the raw features. These results are then explained in two ways—first through Power BI’s native Key Influencers visual, and second through a Groq-hosted Llama model that transforms the numeric evidence into an investigator-readable narrative.</p>
+<p>The pipeline runs in five stages: synthetic claims data is generated in Python, anomalies are detected using an Isolation Forest model, risk scores/ labels are assigned based on the anomaly score distribution, the AI Insights are generated using Groq Llama API for the top 20 most anomalous claims and the results are loaded into Power BI alongside the raw features. Thus the results are explained in two ways — first through the Groq-hosted Llama model and second through Power BI’s native Key Influencers &amp; smart narratives visual that transforms the numeric evidence into an investigator-readable narrative.</p>
 <div class="stats-corner">
 <p>The architecture treats the model’s <strong>contamination rate</strong> — the assumed proportion of fraudulent claims in the population — as a tunable prior, not a fixed constant. Set it too high and investigators drown in false leads; set it too low and fraud hides comfortably inside the bulk of “normal” claims. Choosing this value is a precision/recall trade-off dressed up as a single parameter.</p>
 </div>
@@ -242,9 +243,32 @@ June 18, 2026
 </section>
 <section id="creating-synthetic-claims-data" class="level2">
 <h2 class="anchored" data-anchor-id="creating-synthetic-claims-data">Creating Synthetic Claims Data</h2>
-<p>Since real claims data is sensitive and rarely shareable, this project starts with a synthetic dataset built to mimic the shape of real insurance claims using parameters calibrated to:IRDAI Annual Report 2023-24 (fraud prevalence ~9%, vehicle type mix,claims ratio 82.52%, surveyor threshold ₹75,000) and IMF WEO April 2026 — India CPI &amp; GDP growth (actual + projections) data. It has right-skewed claim amounts, a long tail of late-reported claims, and a small minority of fraud-correlated patterns rather than purely random noise.</p>
+<p>Since real claims data is sensitive and rarely shareable, this project starts with a synthetic dataset built to mimic the shape of real insurance claims using parameters calibrated to : IRDAI Annual Report 2023-24 (fraud prevalence ~9%, vehicle type mix, claims ratio 82.52%, surveyor threshold ₹75,000) and IMF WEO April 2026 — India CPI &amp; GDP growth (actual + projections) data. It has right-skewed claim amounts, a long tail of late-reported claims, and a small minority of fraud-correlated patterns rather than purely random noise.</p>
+<hr>
+</section>
+<section id="isolation-forest-for-anomaly-detection" class="level2">
+<h2 class="anchored" data-anchor-id="isolation-forest-for-anomaly-detection">Isolation Forest for Anomaly Detection</h2>
+<p>Isolation Forest is an unsupervised machine learning algorithm designed to identify anomalies by exploiting the fact that unusual observations are easier to isolate than normal ones. Rather than modeling normal behavior or estimating underlying data distributions, it works like a randomized game of 20 Questions, repeatedly partitioning the data using randomly selected features and split values to build a collection of isolation trees. Since anomalous observations lie in sparse regions of the feature space, they are typically isolated after fewer splits than normal observations, resulting in shorter average path lengths across the forest. This distribution-free approach makes Isolation Forest particularly effective for high-dimensional, skewed, and complex real-world datasets where traditional statistical outlier detection methods may struggle. In this project, the model assigns an anomaly score to each insurance claim, with the highest-scoring claims flagged as potential anomalies for further investigation. These scores then form the basis for both the AI-generated explanations and the interactive Power BI visualizations, enabling suspicious claims to be identified and interpreted in a clear, business-friendly manner.</p>
 <div class="stats-corner">
-<p>Isolation Forest works like a randomized game of twenty questions. Each tree splits the data on random features at random thresholds, and outliers — sitting far from the crowd — tend to get separated from everyone else in far fewer splits than normal points do. Average that “path length” across the forest, and a short average path becomes the statistical signature of an anomaly.</p>
+<p>An Isolation Forest score tells you claim A is <em>more</em> anomalous than claim B, but not that claim A has a “73% chance of being fraud.” Getting from a ranking to a calibrated probability needs an extra step — typically Platt scaling or isotonic regression fit against some ground truth.</p>
+</div>
+<div class="stats-corner">
+<p>Some classical statistical techniques for anomay detection are:</p>
+<ul>
+<li><strong>Z-scores</strong>: Measures how many standard deviations a data point is from the mean. A high absolute Z-score indicates an outlier.</li>
+<li><strong>Box-plots / IQR (Interquartile Range)</strong>: Measures the spread of the middle 50% of the data - Points outside 1.5 times the IQR from the first and third quartiles are considered outliers.</li>
+<li><strong>Mahalanobis distance</strong>: Measures the distance of a point from the mean of a multivariate distribution, taking into account correlations between variables. Points with high Mahalanobis distances are considered outliers. – It acts as a Multivariate equivalent of Z-scores.</li>
+</ul>
+<p>Some classical machine learning techniques for anomaly detection are:</p>
+<ul>
+<li><p>Unsupervised Models:</p></li>
+<li><p><strong>DBSCAN</strong>: It groups densely packed data points together into clusters. Points that do not belong to any cluster are considered outliers.</p></li>
+<li><p><strong>One-Class SVM</strong>: It learns and establishes a decision boundary around the normal data points, and points outside this boundary are considered outliers.</p></li>
+<li><p><strong>Local Outlier Factor (LOF)</strong>: It measures the local density deviation of a data point with respect to its neighbors. Points with significantly lower density than their neighbors are considered outliers.</p></li>
+<li><p>Semi-Supervised Models:</p></li>
+<li><p><strong>Autoencoders</strong>: Neural networks that learn to compress and reconstruct data. Points with high reconstruction error are considered outliers:</p></li>
+<li><p><strong>LSTM-based models</strong>: For sequential data, LSTM networks can learn normal patterns and flag deviations as anomalies.</p></li>
+</ul>
 </div>
 <hr>
 </section>
@@ -253,22 +277,26 @@ June 18, 2026
 <p>A numeric anomaly score tells an investigator <em>that</em> something is unusual, not <em>why</em>. To close that gap, the top 20 flagged claim’s score and feature values are passed to a Llama model hosted on Groq, which returns a short, plain-English explanation grounded in the actual numbers rather than a free-form guess.</p>
 <p><img src="Claim_specific_AI_insight.png" class="img-fluid"></p>
 <div class="stats-corner">
-<p><code>temperature=0.3</code> is a statistical choice, not a stylistic one — it narrows the model’s output distribution so the same claim produces a consistent explanation run to run, much like reducing variance in a noisy estimator. Just as important: the prompt hands the model the actual feature values and score instead of asking it to infer them, grounding the generated text in evidence rather than letting it hallucinate a plausible-sounding story.</p>
+<p>Here, <code>temperature=0.3</code> is a statistical choice, not a stylistic one — it narrows the model’s output distribution so the same claim produces a consistent explanation run to run, much like reducing variance in a noisy estimator. Just as important: the prompt hands the model the actual feature values and score instead of asking it to infer them, grounding the generated text in evidence rather than letting it hallucinate a plausible-sounding story.</p>
 </div>
 <hr>
 </section>
 <section id="dashboard-design" class="level2">
 <h2 class="anchored" data-anchor-id="dashboard-design">Dashboard Design</h2>
 <p><img src="Fraud_Overview.png" class="img-fluid"></p>
-<p>Key KPI cards summarize claim volumes, known fraud cases, machine-learning flagged claims, and median claim amounts. Visualizations highlight the geographic distribution of fraud, yearly trends between inflation (CPI) and anomaly scores, and the relationship between GDP growth, claim amounts, and risk categories. A built-in Key Influencers analysis explains the factors driving anomaly flags, revealing that customers with more than two claims in the previous 12 months are significantly more likely to be classified as suspicious. Together, the dashboard enables insurers to monitor fraud patterns, understand risk drivers, and support data-driven investigation decisions.</p>
+<p><img src="AI_Insights.png" class="img-fluid"></p>
+<p>Key KPI cards summarize claim volumes, known fraud cases, machine-learning flagged claims, and median claim amounts. Visualizations highlight the geographic distribution of fraud, yearly trends between inflation (CPI) and anomaly scores, and the relationship between GDP growth, claim amounts, and risk categories. A built-in Key Influencers analysis explains the factors driving anomaly flags, revealing that customers with more than two claims in the previous 12 months are significantly more likely to be classified as suspicious. In the AI Insights page, the dashboard provides detailed explanations for each flagged claim, helping investigators understand the reasoning behind why a particular claim is marked as fraudulent. A portfolio level summary is also provided by the Power BI’s built-in Smart Narrative visual. Together, the dashboard enables insurers to monitor fraud patterns, understand risk drivers, and support data-driven investigation decisions.</p>
 <div class="stats-corner">
 <p>Power BI’s Key Influencers visual isn’t magic — under the hood it runs a sequence of statistical tests (chi-square for categorical splits, a step-wise logistic regression for continuous ones) to measure each candidate field’s marginal association with the target, then ranks fields by effect size. It’s a lightweight, point-and-click cousin of the feature-importance techniques used to interpret the Isolation Forest itself.</p>
+</div>
+<div class="stats-corner">
+<p>One more point to note here is - Whenever we have a dataset with high valued outliers, the median is a better measure of central tendency than the mean. <em>The median is less sensitive to extreme values</em> and provides a more robust representation of the typical value in the dataset. In this case, using the median claim amount helps to avoid skewing the analysis due to a few exceptionally high claims, allowing for a more accurate assessment of the overall claim distribution.</p>
 </div>
 <hr>
 </section>
 <section id="smart-narrative-vs-generative-ai" class="level2">
 <h2 class="anchored" data-anchor-id="smart-narrative-vs-generative-ai">Smart Narrative vs Generative AI</h2>
-<p>Power BI ships with a built-in Smart Narrative visual, and it’s worth being precise about how that differs from the Groq-powered explanations above — they look similar on the surface but work in fundamentally different ways.</p>
+<p>Power BI includes a built-in Smart Narrative visual that automatically summarizes report data. While it may appear similar to the LLM-generated explanations used in this project, the two approaches serve different purposes. Smart Narratives focus on describing what the data shows, whereas the LLM generates contextual explanations for why a specific claim has been identified as anomalous.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -285,8 +313,8 @@ June 18, 2026
 <tbody>
 <tr class="odd">
 <td><strong>How it works</strong></td>
-<td>Fills pre-built phrase templates with computed aggregates</td>
-<td>Reasons freely over the supplied numbers in natural language</td>
+<td>Automatically generates summaries from report measures and visuals using built-in analytics</td>
+<td>Generates contextual explanations from the supplied claim attributes and anomaly score in natural language</td>
 </tr>
 <tr class="even">
 <td><strong>Flexibility</strong></td>
@@ -296,17 +324,17 @@ June 18, 2026
 <tr class="odd">
 <td><strong>Grounding</strong></td>
 <td>Always numerically exact (it’s just string interpolation)</td>
-<td>Numerically grounded only if the prompt supplies the values</td>
+<td>Depends on the supplied prompt and data</td>
 </tr>
 <tr class="even">
-<td><strong>Best for</strong></td>
-<td>Fast, reliable summary stats on any page</td>
+<td><strong>Explainability</strong></td>
+<td>Describes <em>what</em> the data shows</td>
 <td>Investigator-style reasoning about <em>why</em> a specific claim looks risky</td>
 </tr>
 </tbody>
 </table>
-<div class="stats-corner">
-<p>Strip away the branding and the line between the two is really “rule-based string interpolation over computed statistics” versus “a language model conditioned on those same statistics.” Same underlying numbers, different layer of abstraction on top.</p>
+<div class="under-the-hood">
+<p>At their core, both Smart Narratives and LLM-generated explanations are driven by the same underlying statistics—they operate on the same measures, aggregates, and anomaly scores. The key difference lies in the abstraction layer. Smart Narratives apply predefined rules to transform those statistics into descriptive text, whereas an LLM generates context-aware explanations conditioned on the supplied numerical information and prompt. In other words, the data remains the same; only the mechanism used to translate it into natural language changes.</p>
 </div>
 <hr>
 </section>
@@ -322,28 +350,25 @@ June 18, 2026
 <section id="key-learnings" class="level2">
 <h2 class="anchored" data-anchor-id="key-learnings">Key Learnings</h2>
 <ul>
-<li>Unsupervised models live or die by the <strong>contamination</strong> assumption — it deserves as much tuning attention as any supervised hyperparameter.</li>
-<li>An LLM explanation is only as trustworthy as the numbers it’s grounded in; ungrounded prompts invite confident-sounding hallucination.</li>
-<li>Power BI’s native Key Influencers is a strong complement to a custom model, not a replacement — it’s fast to read but shallower than a purpose-built detector.</li>
-<li>Synthetic data design matters more than expected: correlated, skewed features make for a far more convincing demo than uniform random noise.</li>
+<li><strong>Unsupervised anomaly detection is highly sensitive to the contamination parameter</strong> - Choosing an appropriate value has a significant impact on model performance and should be treated as a critical hyperparameter rather than relying solely on the default setting.</li>
+<li><strong>LLM-generated explanations are only as trustworthy as the data they are grounded in</strong> - Supplying the model with accurate numerical inputs and clear prompts is essential to minimize hallucinations and ensure faithful explanations.</li>
+<li><strong>Power BI’s Key Influencers complements, rather than replaces, a dedicated anomaly detection model</strong> - It excels at identifying factors associated with outcomes in the current dataset but is not designed to detect rare observations in the same way as an Isolation Forest.</li>
+<li><strong>Synthetic data quality is just as important as model selection</strong> - Designing realistic distributions, feature correlations, and class imbalance produces demonstrations that better reflect real-world anomaly detection challenges.</li>
 </ul>
 <div class="stats-corner">
-<p>The single biggest lesson was really about precision and recall in disguise: every contamination value tested traded false leads for missed fraud somewhere on that curve, and no single number was “correct” — only better or worse suited to how much investigator time the team actually had.</p>
+<p>Perhaps, the biggest lesson was that contamination tuning is really about managing the precision-recall trade-off. Every value tested shifted the balance between generating more false leads and missing potentially fraudulent claims. There was no single “correct” contamination value — only one that best matched the available investigator capacity and the business’s tolerance for risk.</p>
 </div>
 <hr>
 </section>
 <section id="future-improvements" class="level2">
 <h2 class="anchored" data-anchor-id="future-improvements">Future Improvements</h2>
+<p>While the current solution demonstrates an end-to-end anomaly detection workflow, there are several directions that could make it even more robust:</p>
 <ul>
-<li>Replace synthetic labels with real (or real-adjacent) outcomes and benchmark against a supervised ensemble.</li>
-<li>Build a feedback loop so investigator dispositions (confirmed fraud / false positive) retrain the model over time.</li>
-<li>Calibrate raw anomaly scores into true probabilities, since Isolation Forest scores are a ranking, not a probability, out of the box.</li>
-<li>Extend the Groq prompt with case history and prior similar claims for richer context.</li>
-<li>Add SHAP-based explainability alongside Key Influencers for a second, model-native view of “why.”</li>
+<li><strong>Benchmark against supervised models</strong>. Compare Isolation Forest with supervised ensemble methods using real or realistically labeled fraud outcomes to understand where each approach performs best.</li>
+<li><strong>Introduce a feedback loop</strong> - Use investigator outcomes (confirmed fraud vs.&nbsp;false positive) to periodically retrain or refine the model as fraud patterns evolve.</li>
+<li><strong>Enhance model explainability</strong> - Complement Power BI’s Key Influencers with SHAP values to provide model-specific explanations for why individual claims are flagged. <strong>Improve AI-generated explanations</strong> - Enrich the LLM prompt with historical case summaries and similar claims to generate more contextual and actionable insights.</li>
 </ul>
-<div class="stats-corner">
-<p>That calibration point is worth dwelling on: an Isolation Forest score tells you claim A is <em>more</em> anomalous than claim B, but not that claim A has a “73% chance of being fraud.” Getting from a ranking to a calibrated probability needs an extra step — typically Platt scaling or isotonic regression fit against some ground truth.</p>
-</div>
+<hr>
 
 
 </section>

@@ -377,3 +377,56 @@ h2{
     color:#dbe4ee;
     line-height:1.2;
 }
+
+.under-the-hood {
+
+    position: relative;
+
+    margin: 2.5rem 0;
+
+    padding: 2rem 2.4rem;
+
+    background: linear-gradient(
+
+      180deg,
+
+      rgba(16,25,44,.96),
+
+      rgba(10,18,34,.99)
+
+    );
+
+    border: 2px solid rgba(86,173,255,.45);
+
+    border-radius: 38px;
+
+    box-shadow:
+
+      inset 0 0 0 5px rgba(255,255,255,.03),
+
+      0 0 26px rgba(86,173,255,.16);
+    
+    color: var(--color-muted);
+
+    font-size: .98rem;
+
+    line-height: 1.8;
+}
+
+.under-the-hood::before {
+
+    content: "⚙️ Under The Hood";
+
+    display: block;
+
+    margin-bottom: 1rem;
+
+    font-size: .78rem;
+
+    letter-spacing: 2px;
+
+    font-weight: 700;
+
+    color: #6EE7FF;
+
+}
