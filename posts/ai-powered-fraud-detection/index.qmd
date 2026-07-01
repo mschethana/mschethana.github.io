@@ -33,7 +33,7 @@ format:
 
 ::: {.text-end}
 <div class="meta-label">Published</div>
-<div class="meta-value">June 18, 2026</div>
+<div class="meta-value">July 1, 2026</div>
 :::
 
 :::
