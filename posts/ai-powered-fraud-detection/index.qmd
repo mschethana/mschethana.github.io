@@ -56,7 +56,7 @@ Anomaly detection rests on a simple statistical idea: fraud is rare, and rare ev
 
 ![](Architecture.png){width=30% fig-align="center"}
 
-The pipeline runs in five stages: synthetic claims data is generated in Python, anomalies are detected using an Isolation Forest model, risk scores/ labels are assigned based on the anomaly score distribution, the AI Insights are generated using Groq Llama API for the top 20 most anomalous claims and the results are loaded into Power BI alongside the raw features. Thus the results are explained in two ways — first through the Groq-hosted Llama model and second through Power BI's native Key Influencers & smart narratives visual that transforms the numeric evidence into an investigator-readable narrative.
+The pipeline runs in five stages: synthetic claims data is generated in Python, anomalies are detected using an Isolation Forest model, risk scores/ labels are assigned based on the anomaly score distribution, the AI Insights are generated using Groq Llama API for the top 20 most anomalous claims and the results are loaded into Power BI alongside the raw features. Thus the results are explained in two ways — first through the Groq-hosted Llama model and second through Power BI's native Key Influencers & Smart Narratives visual that transforms the numeric evidence into an investigator-readable narrative.
 
 ::: {.stats-corner}
 The architecture treats the model's **contamination rate** — the assumed proportion of fraudulent claims in the population — as a tunable prior, not a fixed constant. Set it too high and investigators drown in false leads; set it too low and fraud hides comfortably inside the bulk of "normal" claims. Choosing this value is a precision/recall trade-off dressed up as a single parameter.
