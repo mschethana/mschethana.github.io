@@ -1,31 +1,10 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Where Statistical Rigor Meets Intelligent Systems",
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Statistically Intelligent",
     "section": "",
-    "text": "A space for analytical thinking, statistical exploration, and applied machine learning.\nOver time, I’ve found that the most meaningful solutions rarely emerge from intuition alone — they come from understanding patterns, questioning assumptions, and building systems that can reason through uncertainty.\nMy work sits at the intersection of statistics, programming, and intelligent problem solving, with a growing focus on data science and AI-driven applications.\nView Projects"
-  },
-  {
-    "objectID": "index.html#current-focus",
-    "href": "index.html#current-focus",
-    "title": "Where Statistical Rigor Meets Intelligent Systems",
-    "section": "Current Focus",
-    "text": "Current Focus\n\n\nStatistical Thinking\nExploring how classical statistical principles continue to shape modern machine learning and AI systems.\n\n\nIntelligent Systems\nBuilding practical solutions that combine analytical reasoning with automation and scalable workflows.\n\n\nApplied Problem Solving\nUsing Python, data analysis, and structured experimentation to solve real-world data challenges."
-  },
-  {
-    "objectID": "index.html#featured-work",
-    "href": "index.html#featured-work",
-    "title": "Where Statistical Rigor Meets Intelligent Systems",
-    "section": "Featured Work",
-    "text": "Featured Work\n\nAI-Assisted Name Matching Engine\nA Python-based intelligent matching system designed to standardize and reconcile inconsistent entity names across datasets using analytical preprocessing and similarity-based logic.\n\n\nAnomaly Detection & Analytics\nExploring statistical and machine learning approaches for identifying irregular patterns in business and operational datasets."
-  },
-  {
-    "objectID": "index.html#areas-of-interest",
-    "href": "index.html#areas-of-interest",
-    "title": "Where Statistical Rigor Meets Intelligent Systems",
-    "section": "Areas of Interest",
-    "text": "Areas of Interest\n\nStatistics\nMachine Learning\nArtificial Intelligence\nData Analytics\nPredictive Modeling\nNLP & Entity Resolution\nAnalytical Automation\nIntelligent Decision Systems"
+    "text": "From Score to Story\n\n\nExplainable Fraud Detection with Machine Learning, LLMs & Power BI\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -60,7 +39,7 @@
     "href": "projects.html",
     "title": "Projects",
     "section": "",
-    "text": "AI-Assisted Name Matching Engine\nA Python-based intelligent matching system to standardize and reconcile inconsistent entity names across datasets using similarity-based logic.\nView on GitHub →\n\n\nAnomaly Detection & Analytics\nBuilt an end-to-end fraud detection solution that combines Isolation Forest anomaly detection, LLM-generated explanations and Power BI analytics to transform suspicious insurance claims into investigator-readable narratives.\nView on GitHub →"
+    "text": "Future of Paradise — Climate Risk & Interactive Data Storytelling\n\n\nFive islands . One changing climate\n\n\n\nAn interactive scrollytelling project exploring climate vulnerability across Fiji, Kiribati, Samoa, Tuvalu and Vanuatu.\n\n\n\nTools: Python · Pandas · Plotly · NumPy · HTML · CSS · JavaScript · Canva · GitHub Pages\n\n\n\n View Live Site → \n View on GitHub → \n\n\n\n\n\n\nFrom Score to Story — Anomaly Detection & Analytics\n\n\n\nBuilt an end-to-end fraud detection solution that combines Isolation Forest anomaly detection, LLM-generated explanations and Power BI analytics to transform suspicious insurance claims into investigator-readable narratives.\n\n\n\nTools: Python · Pandas · NumPy · Scikit-learn · Isolation Forest · Llama 3.1 · Groq API · Power BI\n\n\n\n View blog post → \n View on GitHub → \n\n\n\n\n\nAI-Assisted Name Matching Engine\n\n\n\nA Python-based intelligent matching system to standardize and reconcile inconsistent entity names across datasets using similarity-based logic.\n\n\n\n View on GitHub →"
   },
   {
     "objectID": "posts/ai-powered-fraud-detection/index.html",
@@ -140,10 +119,31 @@
     "text": "Future Improvements\nWhile the current solution demonstrates an end-to-end anomaly detection workflow, there are several directions that could make it even more robust:\n\nBenchmark against supervised models. Compare Isolation Forest with supervised ensemble methods using real or realistically labeled fraud outcomes to understand where each approach performs best.\nIntroduce a feedback loop - Use investigator outcomes (confirmed fraud vs. false positive) to periodically retrain or refine the model as fraud patterns evolve.\nEnhance model explainability - Complement Power BI’s Key Influencers with SHAP values to provide model-specific explanations for why individual claims are flagged. Improve AI-generated explanations - Enrich the LLM prompt with historical case summaries and similar claims to generate more contextual and actionable insights."
   },
   {
-    "objectID": "blog.html",
-    "href": "blog.html",
-    "title": "Statistically Intelligent",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Where Statistical Rigor Meets Intelligent Systems",
     "section": "",
-    "text": "From Score to Story\n\n\nExplainable Fraud Detection with Machine Learning, LLMs & Power BI\n\n\n\n\n\nNo matching items"
+    "text": "A space for analytical thinking, statistical exploration, and applied machine learning.\nOver time, I’ve found that the most meaningful solutions rarely emerge from intuition alone — they come from understanding patterns, questioning assumptions, and building systems that can reason through uncertainty.\nMy work sits at the intersection of statistics, programming, and intelligent problem solving, with a growing focus on data science and AI-driven applications.\nView Projects"
+  },
+  {
+    "objectID": "index.html#current-focus",
+    "href": "index.html#current-focus",
+    "title": "Where Statistical Rigor Meets Intelligent Systems",
+    "section": "Current Focus",
+    "text": "Current Focus\n\n\nStatistical Thinking\nExploring how classical statistical principles continue to shape modern machine learning and AI systems.\n\n\nIntelligent Systems\nBuilding practical solutions that combine analytical reasoning with automation and scalable workflows.\n\n\nApplied Problem Solving\nUsing Python, data analysis, and structured experimentation to solve real-world data challenges."
+  },
+  {
+    "objectID": "index.html#featured-work",
+    "href": "index.html#featured-work",
+    "title": "Where Statistical Rigor Meets Intelligent Systems",
+    "section": "Featured Work",
+    "text": "Featured Work\n\nAI-Assisted Name Matching Engine\nA Python-based intelligent matching system designed to standardize and reconcile inconsistent entity names across datasets using analytical preprocessing and similarity-based logic.\n\n\nAnomaly Detection & Analytics\nExploring statistical and machine learning approaches for identifying irregular patterns in business and operational datasets."
+  },
+  {
+    "objectID": "index.html#areas-of-interest",
+    "href": "index.html#areas-of-interest",
+    "title": "Where Statistical Rigor Meets Intelligent Systems",
+    "section": "Areas of Interest",
+    "text": "Areas of Interest\n\nStatistics\nMachine Learning\nArtificial Intelligence\nData Analytics\nPredictive Modeling\nNLP & Entity Resolution\nAnalytical Automation\nIntelligent Decision Systems"
   }
 ]
