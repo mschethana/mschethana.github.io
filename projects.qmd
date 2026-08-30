@@ -5,17 +5,90 @@ title: "Projects"
 ::: {.projects-grid}
 
 ::: {.project-card}
-### AI-Assisted Name Matching Engine
-A Python-based intelligent matching system to standardize and reconcile inconsistent entity names across datasets using similarity-based logic.
 
-[View on GitHub →](https://github.com/mschethana/ai-name-matching-engine){.project-button}
+<div class="project-card-content">
+
+<h3>Future of Paradise — Climate Risk & Interactive Data Storytelling</h3>
+<p class="project-tagline">
+<em>Five islands . One changing climate</em>
+</p>
+<br>
+<p>
+An interactive scrollytelling project exploring climate vulnerability
+across Fiji, Kiribati, Samoa, Tuvalu and Vanuatu.
+</p>
+<br>
+
+<p class="project-tools">
+<strong>Tools:</strong> Python · Pandas · Plotly · NumPy · HTML · CSS · JavaScript · Canva · GitHub Pages
+</p>
+<br>
+<div class="project-links">
+
+<a href="https://mschethana.github.io/future-of-paradise/"
+   class="project-button">
+View Live Site →
+</a>
+
+<a href="https://github.com/mschethana/future-of-paradise"
+   class="project-button">
+View on GitHub →
+</a>
+
+</div>
+
+</div>
 :::
 
 ::: {.project-card}
-### Anomaly Detection & Analytics
-Built an end-to-end fraud detection solution that combines Isolation Forest anomaly detection, LLM-generated explanations and Power BI analytics  to transform suspicious insurance claims into investigator-readable narratives.
 
-[View on GitHub →](https://github.com/mschethana/Score-to-Story-Fraud-Detection){.project-button}
+<div class="project-card-content">
+
+<h3>From Score to Story — Anomaly Detection & Analytics</h3>
+<br>
+<p>
+Built an end-to-end fraud detection solution that combines Isolation Forest anomaly detection, LLM-generated explanations and Power BI analytics  to transform suspicious insurance claims into investigator-readable narratives.
+</p>
+<br>
+<p class="project-tools">
+<strong>Tools:</strong> Python · Pandas · NumPy · Scikit-learn · Isolation Forest · Llama 3.1 · Groq API · Power BI
+</p>
+<br>
+<div class="project-links">
+
+<a href="https://mschethana.github.io/posts/ai-powered-fraud-detection/"
+   class="project-button">
+View blog post →
+</a>
+
+<a href="https://github.com/mschethana/Score-to-Story-Fraud-Detection"
+   class="project-button">
+View on GitHub →
+</a>
+
+</div>
+
+</div>
+:::
+
+::: {.project-card}
+<h3> AI-Assisted Name Matching Engine </h3>
+<br>
+<p>
+A Python-based intelligent matching system to standardize and reconcile inconsistent entity names across datasets using similarity-based logic.
+</p>
+<br>
+
+<div class="project-links">
+
+<a href="https://github.com/mschethana/ai-name-matching-engine"
+   class="project-button">
+View on GitHub →
+</a>
+
+</div>
+
+</div>
 :::
 
 :::
